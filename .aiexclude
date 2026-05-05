@@ -1,0 +1,6 @@
+# AI exclude directory
+[aA][iI]-?exclude/
+
+# Never mind old files
+*.old
+*.bak

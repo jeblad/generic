@@ -1,0 +1,19 @@
+{
+  "name": "generic",
+  "version": "0.0.0",
+  "description": "An extension for the Heuristic Reasoning Agent (hera) framework providing model-specific functionality.",
+  "author": "John Erling Blad",
+  "license": "SEE LICENSE IN LICENSE.txt",
+  "private": true,
+  "scripts": {
+    "test": "cd build && ctest --output-on-failure",
+    "release": "commit-and-tag-version"
+  },
+  "keywords": [
+    "hera",
+    "heuristic-reasoning",
+    "cpp",
+    "ai",
+    "generic"
+  ]
+}

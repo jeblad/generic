@@ -1,0 +1,175 @@
+#: /home/john/spaces/generic/src/generic.cpp:134
+#: /home/john/spaces/generic/src/generic.cpp:194
+#: /home/john/spaces/generic/src/generic.cpp:295
+#, c++-format
+msgid "Failed to read agent image from {}: {}"
+msgstr ""
+
+#: /home/john/spaces/generic/src/generic.cpp:157
+#: /home/john/spaces/generic/src/generic.cpp:258
+#: /home/john/spaces/generic/src/generic.cpp:354
+#, c++-format
+msgid "Failed to write agent image to {}: {}"
+msgstr ""
+
+#: /home/john/spaces/generic/src/generic.cpp:230
+#, c++-format
+msgid "Installation aborted: Agent {} is already running (found {})"
+msgstr ""
+
+#: /home/john/spaces/generic/src/generic.cpp:240
+#, c++-format
+msgid "Output file already exists: {}. Use --force to overwrite."
+msgstr ""
+
+#: /home/john/spaces/generic/src/generic.cpp:263
+#: /home/john/spaces/generic/src/generic.cpp:367
+msgid "no callsign"
+msgstr ""
+
+#: /home/john/spaces/generic/src/generic.cpp:323
+#, c++-format
+msgid "Uninstallation aborted: Agent {} is currently running (found {})"
+msgstr ""
+
+#: /home/john/spaces/generic/src/generic.cpp:336
+#, c++-format
+msgid ""
+"Uninstallation aborted: Target file already exists in working directory: {}. "
+"Use --force to overwrite."
+msgstr ""
+
+#: /home/john/spaces/generic/src/generic.cpp:362
+#, c++-format
+msgid "Failed to remove source file after copy: {}"
+msgstr ""
+
+#: /home/john/spaces/generic/src/generic.cpp:415
+msgid "ID"
+msgstr ""
+
+#: /home/john/spaces/generic/src/generic.cpp:416
+msgid "PID"
+msgstr ""
+
+#: /home/john/spaces/generic/src/generic.cpp:417
+msgid "UUID"
+msgstr ""
+
+#: /home/john/spaces/generic/src/generic.cpp:418
+msgid "CALLSIGN"
+msgstr ""
+
+#: /home/john/spaces/generic/src/generic.cpp:419
+msgid "VERSION"
+msgstr ""
+
+#: /home/john/spaces/generic/src/generic.cpp:420
+msgid "MODEL"
+msgstr ""
+
+#: /home/john/spaces/generic/src/generic.cpp:421
+msgid "EPOCH"
+msgstr ""
+
+#: /home/john/spaces/generic/src/generic.cpp:422
+msgid "LICENSE"
+msgstr ""
+
+#: /home/john/spaces/generic/src/generic.cpp:423
+msgid "PROVENANCE"
+msgstr ""
+
+#: /home/john/spaces/generic/src/generic.cpp:614
+#: /home/john/spaces/generic/src/generic.cpp:638
+#: /home/john/spaces/generic/src/generic.cpp:676
+msgid "Description:"
+msgstr ""
+
+#: /home/john/spaces/generic/src/generic.cpp:615
+#: /home/john/spaces/generic/src/generic.cpp:639
+#: /home/john/spaces/generic/src/generic.cpp:677
+msgid "Homepage:"
+msgstr ""
+
+#: /home/john/spaces/generic/src/generic.cpp:616
+#: /home/john/spaces/generic/src/generic.cpp:640
+#: /home/john/spaces/generic/src/generic.cpp:678
+msgid "Version:"
+msgstr ""
+
+#: /home/john/spaces/generic/src/generic.cpp:617
+#: /home/john/spaces/generic/src/generic.cpp:641
+msgid "API level:"
+msgstr ""
+
+#: /home/john/spaces/generic/src/generic.cpp:618
+#: /home/john/spaces/generic/src/generic.cpp:642
+#: /home/john/spaces/generic/src/generic.cpp:681
+msgid "License:"
+msgstr ""
+
+#: /home/john/spaces/generic/src/generic.cpp:619
+#: /home/john/spaces/generic/src/generic.cpp:643
+#: /home/john/spaces/generic/src/generic.cpp:682
+msgid "Copyright:"
+msgstr ""
+
+#: /home/john/spaces/generic/src/generic.cpp:620
+#: /home/john/spaces/generic/src/generic.cpp:644
+#: /home/john/spaces/generic/src/generic.cpp:683
+msgid "Creator:"
+msgstr ""
+
+#: /home/john/spaces/generic/src/generic.cpp:622
+#: /home/john/spaces/generic/src/generic.cpp:646
+#: /home/john/spaces/generic/src/generic.cpp:685
+msgid "Contributor:"
+msgstr ""
+
+#: /home/john/spaces/generic/src/generic.cpp:622
+#: /home/john/spaces/generic/src/generic.cpp:646
+#: /home/john/spaces/generic/src/generic.cpp:685
+msgid "Contributors:"
+msgstr ""
+
+#: /home/john/spaces/generic/src/generic.cpp:624
+#: /home/john/spaces/generic/src/generic.cpp:648
+msgid "translator-credits"
+msgstr ""
+
+#: /home/john/spaces/generic/src/generic.cpp:626
+#: /home/john/spaces/generic/src/generic.cpp:650
+msgid "Translator:"
+msgstr ""
+
+#: /home/john/spaces/generic/src/generic.cpp:626
+#: /home/john/spaces/generic/src/generic.cpp:650
+msgid "Translators:"
+msgstr ""
+
+#: /home/john/spaces/generic/src/generic.cpp:669
+#, c++-format
+msgid "Failed to read agent metadata: {}"
+msgstr ""
+
+#: /home/john/spaces/generic/src/generic.cpp:679
+msgid "Model:"
+msgstr ""
+
+#: /home/john/spaces/generic/src/generic.cpp:680
+msgid "Epoch:"
+msgstr ""
+
+#: /home/john/spaces/generic/src/generic.cpp:688
+msgid "Provenance:"
+msgstr ""
+
+#: /home/john/spaces/generic/src/generic.cpp:721
+#: /home/john/spaces/generic/src/generic.cpp:736
+#: /home/john/spaces/generic/src/generic.cpp:752
+#: /home/john/spaces/generic/src/generic.cpp:767
+#: /home/john/spaces/generic/src/generic.cpp:782
+#, c++-format
+msgid "Entered {}()"
+msgstr ""
