@@ -1,5 +1,5 @@
 /**
- * generic – configuration template for the generic plugin
+ * generic – main entry point for generic plugin tests
  * Copyright © 2026 John Erling Blad. All Rights Reserved.
  * 
  * Protected as a work of art under the Norwegian Copyright Act (Åndsverksloven).
@@ -16,21 +16,23 @@
  * See the full text at LICENSE.txt
  **/
 
-#pragma once
+#include <iostream>
+#include "test_generic.hpp"
 
-/**
- * Configured by CMake for the GENERIC Plugin
- */
+int main() {
+    test_hera_api_version();
+    test_parse_list();
+    test_hera_about_logic();
+    test_hera_about_module_logic();
+    test_hera_clone_integrity();
+    test_hera_install_logic();
+    test_hera_uninstall_logic();
+    test_hera_list_logic();
+    test_hera_prune_logic();
+    test_hera_signal_stop_cont_logic();
+    test_hera_down_logic();
+    test_hera_signal_logic();
 
-#define GENERIC_VERSION_MAJOR @PROJECT_VERSION_MAJOR@
-#define GENERIC_VERSION_MINOR @PROJECT_VERSION_MINOR@
-#define GENERIC_VERSION_PATCH @PROJECT_VERSION_PATCH@
-
-#define GENERIC_MODEL_NAME "@PROJECT_NAME@"
-
-#define GENERIC_DESCRIPTION "@GENERIC_DESCRIPTION@"
-#define GENERIC_HOMEPAGE "@GENERIC_HOMEPAGE@"
-#define GENERIC_LICENSE "@GENERIC_LICENSE@"
-#define GENERIC_COPYRIGHT "@GENERIC_COPYRIGHT@"
-#define GENERIC_CREATOR "@GENERIC_CREATOR@"
-#define GENERIC_CONTRIBUTORS "@GENERIC_CONTRIBUTORS@"
+    std::cout << "All generic API tests passed!" << std::endl;
+    return 0;
+}

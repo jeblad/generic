@@ -2,7 +2,7 @@
 
 An extension for the Heuristic Reasoning Agent (hera) framework that provides the generic functionality.
 
-# Development
+## Development
 
 ### Building
 

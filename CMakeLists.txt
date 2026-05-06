@@ -8,7 +8,7 @@ project(generic
     LANGUAGES CXX
 )
 
-# Metadata for Config.h (Brukt av hera_about)
+# Metadata for Config.h (Used by hera_about)
 set(GENERIC_DESCRIPTION "An extension for the Heuristic Reasoning Agent (hera) framework providing model-specific functionality.")
 set(GENERIC_LICENSE "SEE LICENSE IN LICENSE.txt")
 set(GENERIC_COPYRIGHT "Copyright © 2026 John Erling Blad. All Rights Reserved.")
@@ -43,7 +43,7 @@ if(NOT TARGET glaze::glaze)
     FetchContent_Declare(
         glaze
         GIT_REPOSITORY https://github.com/stephenberry/glaze.git
-        GIT_TAG        v7.4.0
+        GIT_TAG        v7.5.0
         GIT_SHALLOW    TRUE
     )
 endif()
@@ -115,7 +115,7 @@ if(NOT TARGET hera::hera)
 endif()
 
 # --- Git Hooks ---
-# Installerer hooks fra /hooks mappen til .git/hooks ved konfigurering
+# Installs hooks from the /hooks folder to .git/hooks during configuration
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/.git")
     file(GLOB HOOK_FILES "${CMAKE_CURRENT_SOURCE_DIR}/hooks/*")
     foreach(HOOK_FILE ${HOOK_FILES})
@@ -147,7 +147,17 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/cmake/Gettext_helpers.cmake")
     )
 endif()
 
-add_library(generic MODULE src/generic.cpp)
+add_library(generic MODULE 
+    src/generic.cpp
+    src/clone.cpp
+    src/build.cpp
+    src/install.cpp
+    src/uninstall.cpp
+    src/list.cpp
+    src/signal.cpp
+    src/prune.cpp
+    src/about.cpp
+)
 
 target_link_libraries(generic 
     PRIVATE 
@@ -185,7 +195,23 @@ option(BUILD_TESTING "Build unit tests for the plugin" ON)
 if(BUILD_TESTING)
     enable_testing()
     
-    add_executable(test_generic tests/test_generic.cpp src/generic.cpp)
+    add_executable(test_generic 
+        tests/test_main.cpp
+        tests/test_utility.cpp
+        tests/test_about.cpp
+        tests/test_clone.cpp
+        tests/test_lifecycle.cpp
+        tests/test_management.cpp
+        src/generic.cpp
+        src/clone.cpp
+        src/build.cpp
+        src/install.cpp
+        src/uninstall.cpp
+        src/list.cpp
+        src/signal.cpp
+        src/prune.cpp
+        src/about.cpp
+    )
     
     target_include_directories(test_generic PRIVATE 
         "src"

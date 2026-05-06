@@ -1,5 +1,5 @@
 /**
- * generic – configuration template for the generic plugin
+ * generic – the “build” subcommand implementation
  * Copyright © 2026 John Erling Blad. All Rights Reserved.
  * 
  * Protected as a work of art under the Norwegian Copyright Act (Åndsverksloven).
@@ -16,21 +16,23 @@
  * See the full text at LICENSE.txt
  **/
 
-#pragma once
+#include "generic/internal.hpp"
+#include <rlog/rlog.hpp>
+
+namespace hera {
 
 /**
- * Configured by CMake for the GENERIC Plugin
+ * @brief Generic build implementation (not supported).
  */
+Result build(
+    const char * in_fn,
+    const char * out_fn,
+    const char * uuid_str,
+    const char * callsign_str,
+    int flags
+) {
+    ERROR_("Generic plugin does not support 'build' operations");
+    return Result(2);
+}
 
-#define GENERIC_VERSION_MAJOR @PROJECT_VERSION_MAJOR@
-#define GENERIC_VERSION_MINOR @PROJECT_VERSION_MINOR@
-#define GENERIC_VERSION_PATCH @PROJECT_VERSION_PATCH@
-
-#define GENERIC_MODEL_NAME "@PROJECT_NAME@"
-
-#define GENERIC_DESCRIPTION "@GENERIC_DESCRIPTION@"
-#define GENERIC_HOMEPAGE "@GENERIC_HOMEPAGE@"
-#define GENERIC_LICENSE "@GENERIC_LICENSE@"
-#define GENERIC_COPYRIGHT "@GENERIC_COPYRIGHT@"
-#define GENERIC_CREATOR "@GENERIC_CREATOR@"
-#define GENERIC_CONTRIBUTORS "@GENERIC_CONTRIBUTORS@"
+} // namespace hera

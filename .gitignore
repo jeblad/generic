@@ -1,3 +1,7 @@
+*.beve
+*.mo
+*.gmo
+
 # Prerequisites
 *.d
 
