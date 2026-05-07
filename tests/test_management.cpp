@@ -45,19 +45,22 @@ void test_hera_prune_logic() {
 
 void test_hera_signal_logic() {
     std::cout << "Testing hera_signal_logic..." << std::endl;
+    ScopedTestDir env;
     // This will fail without an actual running process, 
     // so we only test that it handles missing PID files correctly.
-    assert(hera::signal(".", ".", "non-existent", 0, HERA_SIGTERM).code == 1);
+    assert(hera::signal(env.path.c_str(), env.path.c_str(), "non-existent", 0, HERA_SIGTERM).code == 1);
 }
 
 void test_hera_down_logic() {
     std::cout << "Testing hera_down_logic..." << std::endl;
-    assert(hera::down(".", ".", "non-existent", 0, 0).code == 1);
+    ScopedTestDir env;
+    assert(hera::down(env.path.c_str(), env.path.c_str(), "non-existent", 0, 0).code == 1);
 }
 
 void test_hera_signal_stop_cont_logic() {
     std::cout << "Testing hera_signal_stop_cont_logic..." << std::endl;
+    ScopedTestDir env;
     // Verifies flag handling
-    assert(hera::signal(".", ".", "none", 0, HERA_SIGSTOP).code == 1);
-    assert(hera::signal(".", ".", "none", 0, HERA_SIGCONT).code == 1);
+    assert(hera::signal(env.path.c_str(), env.path.c_str(), "none", 0, HERA_SIGSTOP).code == 1);
+    assert(hera::signal(env.path.c_str(), env.path.c_str(), "none", 0, HERA_SIGCONT).code == 1);
 }

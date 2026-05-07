@@ -21,17 +21,12 @@
 #include <format>
 #include "generic/internal.hpp"
 #include <rlog/rlog.hpp>
+#include "hera/utility.hpp"
 
 namespace hera {
 
-Result clone(
-    const char * in_fn,
-    const char * out_fn,
-    const char * uuid_str,
-    const char * callsign_str,
-    int flags
-) {
-    FileClone doc;
+Result clone(const char * in_fn, const char * out_fn, const char * uuid_str, const char * callsign_str, int flags) {
+    hera::MultipartAgentContent doc;
     std::string full_buffer;
     
     std::ifstream ifs(in_fn, std::ios::binary | std::ios::ate);
@@ -48,11 +43,11 @@ Result clone(
     if (!ifs.read(full_buffer.data(), size)) return Result(1);
 
     size_t offset = 0;
-    if (!glz::read_beve_at(doc.meta, full_buffer, offset) || doc.meta.type != "metadata") {
+    if (!glz::read_beve_at(doc.meta, full_buffer, offset) || doc.meta.type != "metadata") { // Use hera::MultipartAgentContent
         ERROR_FMT_("Invalid Multipart BEVE: Part 1 is not metadata in {}", in_fn);
         return Result(1);
     }
-
+    
     if (offset < full_buffer.size()) {
         doc.remaining_parts.emplace_back(full_buffer.data() + offset, full_buffer.size() - offset);
     }

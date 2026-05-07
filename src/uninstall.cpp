@@ -22,6 +22,7 @@
 #include <format>
 #include "generic/internal.hpp"
 #include <rlog/rlog.hpp>
+#include "hera/utility.hpp"
 
 namespace hera {
 
@@ -33,10 +34,10 @@ Result uninstall(
     int log_level,
     int flags
 ) {
-    namespace fs = std::filesystem;
+    namespace fs = std::filesystem; // Use hera::MultipartAgentContent
     if (!in_fn || !fs::exists(in_fn)) return Result(1);
 
-    FileClone doc;
+    hera::MultipartAgentContent doc;
     std::string full_buffer;
     std::ifstream ifs(in_fn, std::ios::binary | std::ios::ate);
     if (!ifs) return Result(1); // Error opening file

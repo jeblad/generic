@@ -21,32 +21,82 @@
 #include <filesystem>
 #include <random>
 #include <string>
+#include "hera/testing/utility.hpp"
+
+// --- Plugin Entry Points (C-API) ---
+extern "C" {
+    uint32_t hera_api();
+
+    hera::Result hera_clone(
+        const char * in_fn,
+        const char * out_fn,
+        const char * uuid_str,
+        const char * callsign_str,
+        int log_level,
+        int flags
+    );
+
+    hera::Result hera_build(
+        const char * in_fn,
+        const char * out_fn,
+        const char * uuid_str,
+        const char * callsign_str,
+        int log_level,
+        int flags
+    );
+
+    hera::Result hera_install(
+        const char * in_fn,
+        const char * out_dir,
+        const char * uuid_str,
+        const char * callsign_str,
+        int log_level,
+        int flags
+    );
+
+    hera::Result hera_uninstall(
+        const char * in_fn,
+        const char * out_dir,
+        const char * uuid_str,
+        const char * callsign_str,
+        int log_level,
+        int flags
+    );
+
+    hera::Result hera_list(
+        const char * in_dir,
+        const char * run_dir,
+        const char * id_filter,
+        const char * fields,
+        int log_level,
+        int flags
+    );
+
+    hera::Result hera_about_plugin(
+        const char * in_fn,
+        const char * out_fn,
+        const char * uuid_str,
+        const char * callsign_str,
+        int log_level,
+        int flags
+    );
+
+    hera::Result hera_about_module(
+        const char * in_fn,
+        const char * out_fn,
+        const char * uuid_str,
+        const char * callsign_str,
+        int log_level,
+        int flags
+    );
+}
 
 /**
- * RAII helper to create a unique temporary directory for a test.
- * Ensures isolation and automatic cleanup even if tests fail.
+ * Alias the central ScopedTestDir from hera
  */
-struct ScopedTestDir {
-    std::filesystem::path path;
-    ScopedTestDir() {
-        static std::random_device rd;
-        static std::mt19937 gen(rd());
-        std::uniform_int_distribution<> dis(0, 15);
-        const char* hex = "0123456789abcdef";
-        std::string rand_suffix;
-        for(int i = 0; i < 8; ++i) rand_suffix += hex[dis(gen)];
-
-        path = std::filesystem::temp_directory_path() / ("hera_test_" + rand_suffix);
-        std::filesystem::create_directories(path);
-    }
-    ~ScopedTestDir() {
-        std::error_code ec;
-        std::filesystem::remove_all(path, ec);
-    }
-};
+using ScopedTestDir = hera::testing::ScopedTestDir;
 
 void test_hera_api_version();
-void test_parse_list();
 void test_hera_about_logic();
 void test_hera_about_module_logic();
 void test_hera_clone_integrity();

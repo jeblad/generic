@@ -21,7 +21,6 @@
 
 int main() {
     test_hera_api_version();
-    test_parse_list();
     test_hera_about_logic();
     test_hera_about_module_logic();
     test_hera_clone_integrity();

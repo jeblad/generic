@@ -27,18 +27,6 @@
 
 namespace hera {
 
-/**
- * @brief Specialized structure for the list command to read ONLY metadata.
- * By avoiding glz::generic/extra maps, we ensure that huge binary blobs 
- * in .beve files are skipped efficiently rather than parsed.
- */
-struct AgentHeader {
-    hera::MetaData meta;
-    struct glz {
-        static constexpr auto error_on_unknown_keys = false;
-    };
-};
-
 struct ListEntry {
     std::string id;
     std::string pid;
@@ -84,7 +72,7 @@ Result list(
             std::string stem = entry.path().stem().string();
             if (!id_filter.empty() && stem.find(id_filter) == std::string::npos) continue;
 
-            AgentHeader header;
+            hera::AgentHeader header;
             std::string scratch;
             if (read_file(header, entry.path().string().c_str(), scratch)) continue;
 

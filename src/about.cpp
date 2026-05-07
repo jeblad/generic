@@ -103,7 +103,7 @@ Result about_module(const char* filename, int flags) {
         return Result(1);
     }
 
-    MetaData header;
+    hera::AgentHeader header;
     std::string scratch;
     if (auto ec = read_file(header, filename, scratch)) {
         ERROR_FMT_("Failed to read agent metadata: {}", glz::format_error(ec, scratch));
@@ -111,20 +111,20 @@ Result about_module(const char* filename, int flags) {
     }
 
     bool all = flags & HERA_REPORT_ABOUT;
-    do_report_field(all, flags, HERA_REPORT_DESCRIPTION, _("Description:"), header.description.value_or(""));
-    do_report_field(all, flags, HERA_REPORT_HOMEPAGE, _("Homepage:"), header.homepage.value_or(""));
-    do_report_field(all, flags, HERA_REPORT_VERSION, _("Version:"), header.version.value_or(""));
-    do_report_field(all, flags, HERA_REPORT_MODEL, _("Model:"), header.model.value_or(""));
-    do_report_field(all, flags, HERA_REPORT_EPOCH, _("Epoch:"), header.epoch ? std::to_string(*header.epoch) : "");
-    do_report_field(all, flags, HERA_REPORT_LICENSE, _("License:"), header.license.value_or(""));
-    do_report_field(all, flags, HERA_REPORT_COPYRIGHT, _("Copyright:"), header.copyright.value_or(""));
-    do_report_field(all, flags, HERA_REPORT_CREATOR, _("Creator:"), header.creator.value_or(""));
+    do_report_field(all, flags, HERA_REPORT_DESCRIPTION, _("Description:"), header.meta.description.value_or(""));
+    do_report_field(all, flags, HERA_REPORT_HOMEPAGE, _("Homepage:"), header.meta.homepage.value_or(""));
+    do_report_field(all, flags, HERA_REPORT_VERSION, _("Version:"), header.meta.version.value_or(""));
+    do_report_field(all, flags, HERA_REPORT_MODEL, _("Model:"), header.meta.model.value_or(""));
+    do_report_field(all, flags, HERA_REPORT_EPOCH, _("Epoch:"), header.meta.epoch ? std::to_string(*header.meta.epoch) : "");
+    do_report_field(all, flags, HERA_REPORT_LICENSE, _("License:"), header.meta.license.value_or(""));
+    do_report_field(all, flags, HERA_REPORT_COPYRIGHT, _("Copyright:"), header.meta.copyright.value_or(""));
+    do_report_field(all, flags, HERA_REPORT_CREATOR, _("Creator:"), header.meta.creator.value_or(""));
 
-    do_report_list_vector(all, flags, HERA_REPORT_CONTRIBUTORS, _("Contributor:"), _("Contributors:"), header.contributors);
+    do_report_list_vector(all, flags, HERA_REPORT_CONTRIBUTORS, _("Contributor:"), _("Contributors:"), header.meta.contributors);
 
-    if ((all || (flags & HERA_REPORT_PROVENANCE)) && header.provenance && !header.provenance->empty()) {
+    if ((all || (flags & HERA_REPORT_PROVENANCE)) && header.meta.provenance && !header.meta.provenance->empty()) {
         std::cout << _("Provenance:") << std::endl;
-        for (const auto& p : *header.provenance) {
+        for (const auto& p : *header.meta.provenance) {
             std::cout << "\t" << p.timestamp << ": " << sanitize::untaint(p.action, false) << std::endl;
         }
     }

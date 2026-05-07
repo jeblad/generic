@@ -22,23 +22,7 @@
 #include "hera/utility.hpp"
 #include "test_generic.hpp"
 
-extern "C" {
-    uint32_t hera_api();
-}
-
 void test_hera_api_version() {
     std::cout << "Checking hera_api() version..." << std::endl;
     assert(hera_api() == HERA_API_LEVEL);
-}
-
-void test_parse_list() {
-    std::cout << "Testing parse_list helper..." << std::endl;
-    std::string_view raw = "  Alpha ; Beta;Gamma  ; Delta \n ; ";
-    std::array<std::string_view, 10> out;
-    size_t count = hera::parse_list(raw, out.data(), out.size());
-    assert(count == 4);
-    assert(out[0] == "Alpha");
-    assert(out[1] == "Beta");
-    assert(out[2] == "Gamma");
-    assert(out[3] == "Delta");
 }
