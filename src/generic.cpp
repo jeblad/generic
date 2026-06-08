@@ -39,7 +39,7 @@ extern "C" {
         const char * in_fn,
         const char * out_fn,
         const char * uuid_str,
-        const char * callsign_str,
+        const char * nickname_str,
         int log_level,
         int flags
     ) {
@@ -47,14 +47,14 @@ extern "C" {
         hera::set_uuid(uuid_str ? uuid_str : "");
         hera::set_command("clone");
         DEBUG_FMT_("Entered {}()", __func__);
-        return hera::clone(in_fn, out_fn, uuid_str, callsign_str, flags);
+        return hera::clone(in_fn, out_fn, uuid_str, nickname_str, flags);
     }
 
     HERA_EXPORT hera::Result hera_build(
         const char * in_fn,
         const char * out_fn,
         const char * uuid_str,
-        const char * callsign_str,
+        const char * nickname_str,
         int log_level,
         int flags
     ) {
@@ -62,7 +62,7 @@ extern "C" {
         hera::set_uuid(uuid_str ? uuid_str : "");
         hera::set_command("build");
         DEBUG_FMT_("Entered {}()", __func__);
-        return hera::build(in_fn, out_fn, uuid_str, callsign_str, flags);
+        return hera::build(in_fn, out_fn, uuid_str, nickname_str, flags);
     }
 
 
@@ -70,7 +70,7 @@ extern "C" {
         const char * in_fn,
         const char * out_dir,
         const char * uuid_str,
-        const char * callsign_str,
+        const char * nickname_str,
         int log_level,
         int flags
     ) {
@@ -78,14 +78,14 @@ extern "C" {
         hera::set_uuid(uuid_str ? uuid_str : "");
         hera::set_command("install");
         DEBUG_FMT_("Entered {}()", __func__);
-        return hera::install(in_fn, out_dir, uuid_str, callsign_str, log_level, flags);
+        return hera::install(in_fn, out_dir, uuid_str, nickname_str, log_level, flags);
     }
 
     HERA_EXPORT hera::Result hera_uninstall(
         const char * in_fn,
         const char * out_dir,
         const char * uuid_str,
-        const char * callsign_str,
+        const char * nickname_str,
         int log_level,
         int flags
     ) {
@@ -93,7 +93,7 @@ extern "C" {
         hera::set_uuid(uuid_str ? uuid_str : "");
         hera::set_command("uninstall");
         DEBUG_FMT_("Entered {}()", __func__);
-        return hera::uninstall(in_fn, out_dir, uuid_str, callsign_str, log_level, flags);
+        return hera::uninstall(in_fn, out_dir, uuid_str, nickname_str, log_level, flags);
     }
 
     HERA_EXPORT hera::Result hera_signal(
@@ -155,7 +155,7 @@ extern "C" {
         const char * /*in_fn*/,
         const char * /*out_fn*/,
         const char * uuid_str,
-        const char * /*callsign_str*/,
+        const char * /*nickname_str*/,
         int log_level,
         int flags
     ) {
@@ -169,7 +169,7 @@ extern "C" {
         const char * /*in_fn*/,
         const char * /*out_fn*/,
         const char * uuid_str,
-        const char * /*callsign_str*/,
+        const char * /*nickname_str*/,
         int log_level,
         int flags
     ) {
@@ -183,7 +183,7 @@ extern "C" {
         const char * in_fn,
         const char * /*out_fn*/,
         const char * uuid_str,
-        const char * /*callsign_str*/,
+        const char * /*nickname_str*/,
         int log_level,
         int flags
     ) {

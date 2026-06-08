@@ -29,7 +29,7 @@ Result install(
     const char * in_fn,
     const char * out_dir,
     const char * uuid_str,
-    const char * callsign_str,
+    const char * nickname_str,
     int log_level,
     int flags
 ) {
@@ -65,7 +65,7 @@ Result install(
     const std::string uuid_val = doc.meta.uuid.value_or("");
     if (uuid_val.empty()) return Result(1);
 
-    if (callsign_str) doc.meta.callsign = std::string(callsign_str);
+    if (nickname_str) doc.meta.nickname = std::string(nickname_str);
 
     fs::path out_path = fs::path(out_dir) / (uuid_val + ".beve");
     if (!(flags & HERA_FORCE) && fs::exists(out_path)) {
@@ -97,7 +97,7 @@ Result install(
     }
 
     NOTICE_FMT_("Installed agent {} ({}) from {}.",
-        uuid_val, doc.meta.callsign.value_or(_("no callsign")), in_fn);
+        uuid_val, doc.meta.nickname.value_or(_("no nickname")), in_fn);
 
     return Result(0);
 }

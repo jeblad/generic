@@ -48,13 +48,15 @@ if(NOT TARGET glaze::glaze)
     )
 endif()
 
-# rlog (Combined gettext and syslog)
-FetchContent_Declare(
-    rlog
-    GIT_REPOSITORY git@github.com:jeblad/rlog.git
-    GIT_TAG        main
-    GIT_SHALLOW    TRUE
-)
+if(NOT TARGET rlog)
+    FetchContent_Declare(
+        rlog
+        GIT_REPOSITORY git@github.com:jeblad/rlog.git
+        GIT_TAG        main
+        GIT_SHALLOW    TRUE
+    )
+    FetchContent_MakeAvailable(rlog)
+endif()
 
 if(NOT TARGET uuid_v4)
     FetchContent_Declare(
@@ -63,24 +65,32 @@ if(NOT TARGET uuid_v4)
         GIT_TAG        master
         GIT_SHALLOW    TRUE
     )
+    FetchContent_MakeAvailable(uuid_v4)
 endif()
 
-# uuid_ext
-FetchContent_Declare(
-    uuid_ext
-    GIT_REPOSITORY git@github.com:jeblad/uuid_ext.git
-    GIT_TAG        main
-    GIT_SHALLOW    TRUE
-)
+if(NOT TARGET uuid_ext)
+    FetchContent_Declare(
+        uuid_ext
+        GIT_REPOSITORY git@github.com:jeblad/uuid_ext.git
+        GIT_TAG        main
+        GIT_SHALLOW    TRUE
+    )
+    FetchContent_MakeAvailable(uuid_ext)
+endif()
 
-# Sanitize
-FetchContent_Declare(
-    sanitize
-    GIT_REPOSITORY git@github.com:jeblad/sanitize.git
-    GIT_TAG        main
-    GIT_SHALLOW    TRUE
-)
-FetchContent_MakeAvailable(glaze rlog uuid_v4 uuid_ext sanitize)
+if(NOT TARGET sanitize)
+    FetchContent_Declare(
+        sanitize
+        GIT_REPOSITORY git@github.com:jeblad/sanitize.git
+        GIT_TAG        main
+        GIT_SHALLOW    TRUE
+    )
+    FetchContent_MakeAvailable(sanitize)
+endif()
+
+if(NOT TARGET glaze::glaze)
+    FetchContent_MakeAvailable(glaze)
+endif()
 
 # Generate local configuration header for generic metadata
 configure_file(Config.h.in "${CMAKE_CURRENT_BINARY_DIR}/include/generic/config.h")

@@ -23,10 +23,14 @@ int main() {
     test_hera_api_version();
     test_hera_about_logic();
     test_hera_about_module_logic();
+    test_about_json_format();
+    test_about_yaml_format();
     test_hera_clone_integrity();
     test_hera_install_logic();
     test_hera_uninstall_logic();
     test_hera_list_logic();
+    test_list_json_format();
+    test_list_yaml_format();
     test_hera_prune_logic();
     test_hera_signal_stop_cont_logic();
     test_hera_down_logic();

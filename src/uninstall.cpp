@@ -30,7 +30,7 @@ Result uninstall(
     const char * in_fn,
     const char * out_dir,
     const char * uuid_str,
-    const char * callsign_str,
+    const char * nickname_str,
     int log_level,
     int flags
 ) {
@@ -106,7 +106,7 @@ Result uninstall(
     }
 
     NOTICE_FMT_("Uninstalled agent {} ({}) to {}.", 
-        uuid_val, doc.meta.callsign.value_or(_("no callsign")), target_path.string());
+        uuid_val, doc.meta.nickname.value_or(_("no nickname")), target_path.string());
 
     return Result(0);
 }

@@ -25,7 +25,7 @@
 
 namespace hera {
 
-Result clone(const char * in_fn, const char * out_fn, const char * uuid_str, const char * callsign_str, int flags) {
+Result clone(const char * in_fn, const char * out_fn, const char * uuid_str, const char * nickname_str, int flags) {
     hera::MultipartAgentContent doc;
     std::string full_buffer;
     
@@ -53,7 +53,7 @@ Result clone(const char * in_fn, const char * out_fn, const char * uuid_str, con
     }
 
     if (uuid_str) doc.meta.uuid = std::string(uuid_str);
-    if (callsign_str) doc.meta.callsign = std::string(callsign_str);
+    if (nickname_str) doc.meta.nickname = std::string(nickname_str);
 
     auto now = std::chrono::system_clock::now();
     std::string timestamp = std::format("{:%FT%TZ}", std::chrono::floor<std::chrono::seconds>(now));

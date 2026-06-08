@@ -17,6 +17,7 @@
  **/
 
 #include <iostream>
+#include <sstream>
 #include <cassert>
 #include <filesystem>
 #include <fstream>
@@ -35,7 +36,7 @@ void test_hera_about_module_logic() {
     namespace fs = std::filesystem;
     ScopedTestDir env;
     fs::path test_file = env.path / "about_test.beve";
-    
+
     // Create a minimal file for testing
     hera::MetaData meta;
     meta.type = "metadata";
@@ -49,4 +50,47 @@ void test_hera_about_module_logic() {
     ofs.close();
 
     assert(hera::about_module(test_file.string().c_str(), 0).code == 0);
+}
+
+void test_about_json_format() {
+    std::cout << "Testing about JSON format output..." << std::endl;
+
+    // Capture stdout
+    std::ostringstream captured;
+    std::streambuf* old_buf = std::cout.rdbuf(captured.rdbuf());
+    hera::about_plugin(HERA_FORMAT_JSON | HERA_REPORT_ABOUT);
+    hera::about_system(HERA_FORMAT_JSON | HERA_REPORT_ABOUT);
+    std::cout.rdbuf(old_buf);
+
+    // Each line must be valid JSON (one object per call)
+    std::istringstream lines(captured.str());
+    std::string line;
+    int count = 0;
+    while (std::getline(lines, line)) {
+        if (line.empty()) continue;
+        glz::generic parsed;
+        auto ec = glz::read_json(parsed, line);
+        assert(!ec);
+        ++count;
+    }
+    assert(count >= 2); // one object per about_* call
+}
+
+void test_about_yaml_format() {
+    std::cout << "Testing about YAML format output..." << std::endl;
+
+    std::ostringstream captured;
+    std::streambuf* old_buf = std::cout.rdbuf(captured.rdbuf());
+    hera::about_plugin(HERA_FORMAT_YAML | HERA_REPORT_ABOUT);
+    std::cout.rdbuf(old_buf);
+
+    // Every non-empty line must match "key: value"
+    std::istringstream lines(captured.str());
+    std::string line;
+    while (std::getline(lines, line)) {
+        if (line.empty()) continue;
+        auto colon = line.find(": ");
+        assert(colon != std::string::npos);
+        assert(colon > 0); // key must be non-empty
+    }
 }

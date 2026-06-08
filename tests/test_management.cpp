@@ -17,8 +17,10 @@
  **/
 
 #include <iostream>
+#include <sstream>
 #include <cassert>
 #include <filesystem>
+#include <fstream>
 #include "test_generic.hpp"
 #include "generic/internal.hpp"
 
@@ -31,6 +33,64 @@ void test_hera_list_logic() {
     
     // List should work even if the directory is empty
     assert(hera::list(lib_dir.string().c_str(), nullptr, nullptr, nullptr, 0, 0).code == 0);
+}
+
+void test_list_json_format() {
+    std::cout << "Testing list JSON format output..." << std::endl;
+    namespace fs = std::filesystem;
+    ScopedTestDir env;
+    fs::path lib_dir = env.path / "test_lib";
+    fs::create_directories(lib_dir);
+
+    // Create a minimal .beve agent file
+    hera::MetaData meta;
+    meta.type = "metadata";
+    meta.nickname = "TestAgent";
+    std::string buf;
+    assert(!glz::write_beve(meta, buf));
+    std::ofstream ofs(lib_dir / "test-agent.beve", std::ios::binary);
+    ofs.write(buf.data(), static_cast<std::streamsize>(buf.size()));
+    ofs.close();
+
+    std::ostringstream captured;
+    std::streambuf* old_buf = std::cout.rdbuf(captured.rdbuf());
+    hera::list(lib_dir.string().c_str(), nullptr, nullptr, nullptr, 0, HERA_FORMAT_JSON);
+    std::cout.rdbuf(old_buf);
+
+    glz::generic parsed;
+    auto ec = glz::read_json(parsed, captured.str());
+    assert(!ec);
+}
+
+void test_list_yaml_format() {
+    std::cout << "Testing list YAML format output..." << std::endl;
+    namespace fs = std::filesystem;
+    ScopedTestDir env;
+    fs::path lib_dir = env.path / "test_lib";
+    fs::create_directories(lib_dir);
+
+    // Create a minimal .beve agent file
+    hera::MetaData meta;
+    meta.type = "metadata";
+    meta.nickname = "TestAgent";
+    std::string buf;
+    assert(!glz::write_beve(meta, buf));
+    std::ofstream ofs(lib_dir / "test-agent.beve", std::ios::binary);
+    ofs.write(buf.data(), static_cast<std::streamsize>(buf.size()));
+    ofs.close();
+
+    std::ostringstream captured;
+    std::streambuf* old_buf = std::cout.rdbuf(captured.rdbuf());
+    hera::list(lib_dir.string().c_str(), nullptr, nullptr, nullptr, 0, HERA_FORMAT_YAML);
+    std::cout.rdbuf(old_buf);
+
+    // Every non-empty line must start with "- " or "  key: value"
+    std::istringstream lines(captured.str());
+    std::string line;
+    while (std::getline(lines, line)) {
+        if (line.empty()) continue;
+        assert(line.substr(0, 2) == "- " || line.substr(0, 2) == "  ");
+    }
 }
 
 void test_hera_prune_logic() {

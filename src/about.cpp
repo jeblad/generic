@@ -1,16 +1,16 @@
 /**
- * generic – the “about” subcommand implementation
+ * generic – the "about" subcommand implementation
  * Copyright © 2026 John Erling Blad. All Rights Reserved.
- * 
+ *
  * Protected as a work of art under the Norwegian Copyright Act (Åndsverksloven).
  *
  * STATUS: PRIVATE WORK / ARTISTIC PROPERTY
  * 1. This code is provided for EXHIBITION AND PEER REVIEW ONLY.
  * 2. No license is granted for execution, linking, or commercial distribution.
- * 3. Derivative works are governed by Åndsverksloven § 6; only independent 
+ * 3. Derivative works are governed by Åndsverksloven § 6; only independent
  *    new works of art may be created.
  *
- * WARNING: This work is not intended for functional use in jurisdictions 
+ * WARNING: This work is not intended for functional use in jurisdictions
  * that do not recognize software as an artistic work of authorship.
  *
  * See the full text at LICENSE.txt
@@ -20,6 +20,11 @@
 #include <format>
 #include <filesystem>
 #include <cstring>
+#include <map>
+#include <vector>
+#include <string>
+#include <string_view>
+#include <array>
 
 #include "hera/config.h"
 #include "generic/config.h"
@@ -30,70 +35,116 @@
 
 namespace hera {
 
-static void do_report_field(bool all, int flags, int field_flag, const char* label, std::string_view val) {
-    if ((all || (flags & field_flag)) && !val.empty()) {
-        std::cout << label << std::endl << "\t" << val << std::endl;
-    }
-}
+struct FieldEntry {
+    std::string key;
+    std::string label;
+    std::string value;
+    bool is_list{false};
+};
 
-static void do_report_list_string(bool all, int flags, int field_flag, const char* s, const char* p, std::string_view raw) {
-    if (!(all || (flags & field_flag)) || raw.empty()) return;
+static std::string join_list(std::string_view raw) {
     std::array<std::string_view, 32> items;
-    if (size_t count = parse_list(raw, items.data(), items.size()); count > 0) {
-        std::cout << (count == 1 ? s : p) << std::endl;
-        for (size_t i = 0; i < count; ++i) std::cout << "\t" << items[i] << std::endl;
+    size_t count = parse_list(raw, items.data(), items.size());
+    std::string result;
+    for (size_t i = 0; i < count; ++i) {
+        if (i > 0) result += ", ";
+        result += items[i];
     }
+    return result;
 }
 
-static void do_report_list_vector(bool all, int flags, int field_flag, const char* s, const char* p, const std::optional<std::vector<std::string>>& items) {
-    if ((all || (flags & field_flag)) && items && !items->empty()) {
-        std::cout << (items->size() == 1 ? s : p) << std::endl;
-        for (const auto& item : *items) {
-            std::cout << "\t" << item << std::endl;
+static void emit_result(const std::vector<FieldEntry>& fields, int flags) {
+    if (flags & HERA_FORMAT_JSON) {
+        std::map<std::string, std::string> obj;
+        for (const auto& f : fields) obj[f.key] = f.value;
+        std::string out;
+        if (glz::write_json(obj, out)) return;
+        std::cout << out << "\n";
+    } else if (flags & HERA_FORMAT_YAML) {
+        for (const auto& f : fields)
+            std::cout << f.key << ": " << f.value << "\n";
+    } else {
+        for (const auto& f : fields) {
+            if (f.is_list) {
+                std::array<std::string_view, 32> items;
+                size_t count = parse_list(f.value, items.data(), items.size());
+                if (count > 0) {
+                    std::cout << f.label << "\n";
+                    for (size_t i = 0; i < count; ++i)
+                        std::cout << "\t" << items[i] << "\n";
+                }
+            } else {
+                std::cout << f.label << "\n\t" << f.value << "\n";
+            }
         }
     }
 }
 
+static bool want(bool all, int flags, int field_flag) {
+    return all || (flags & field_flag);
+}
+
 Result about_plugin(int flags) {
     bool all = flags & HERA_REPORT_ABOUT;
-    std::string version = std::format("{}.{}.{}", GENERIC_VERSION_MAJOR, GENERIC_VERSION_MINOR, GENERIC_VERSION_PATCH);
+    bool structured = flags & (HERA_FORMAT_JSON | HERA_FORMAT_YAML);
+    std::string version = std::format("{}.{}.{}",
+        GENERIC_VERSION_MAJOR, GENERIC_VERSION_MINOR, GENERIC_VERSION_PATCH);
 
-    do_report_field(all, flags, HERA_REPORT_DESCRIPTION, _("Description:"), GENERIC_DESCRIPTION);
-    do_report_field(all, flags, HERA_REPORT_HOMEPAGE, _("Homepage:"), GENERIC_HOMEPAGE);
-    do_report_field(all, flags, HERA_REPORT_VERSION, _("Version:"), version);
-    do_report_field(all, flags, HERA_REPORT_API, _("API level:"), std::to_string(HERA_API_LEVEL));
-    do_report_field(all, flags, HERA_REPORT_LICENSE, _("License:"), GENERIC_LICENSE);
-    do_report_field(all, flags, HERA_REPORT_COPYRIGHT, _("Copyright:"), GENERIC_COPYRIGHT);
-    do_report_field(all, flags, HERA_REPORT_CREATOR, _("Creator:"), GENERIC_CREATOR);
-
-    do_report_list_string(all, flags, HERA_REPORT_CONTRIBUTORS, _("Contributor:"), _("Contributors:"), GENERIC_CONTRIBUTORS);
-
+    std::vector<FieldEntry> fields;
+    if (want(all, flags, HERA_REPORT_DESCRIPTION) && *GENERIC_DESCRIPTION)
+        fields.push_back({"description", _("Description:"), GENERIC_DESCRIPTION});
+    if (want(all, flags, HERA_REPORT_HOMEPAGE) && *GENERIC_HOMEPAGE)
+        fields.push_back({"homepage", _("Homepage:"), GENERIC_HOMEPAGE});
+    if (want(all, flags, HERA_REPORT_VERSION))
+        fields.push_back({"version", _("Version:"), version});
+    if (want(all, flags, HERA_REPORT_API))
+        fields.push_back({"api_level", _("API level:"), std::to_string(HERA_API_LEVEL)});
+    if (want(all, flags, HERA_REPORT_LICENSE) && *GENERIC_LICENSE)
+        fields.push_back({"license", _("License:"), GENERIC_LICENSE});
+    if (want(all, flags, HERA_REPORT_COPYRIGHT) && *GENERIC_COPYRIGHT)
+        fields.push_back({"copyright", _("Copyright:"), GENERIC_COPYRIGHT});
+    if (want(all, flags, HERA_REPORT_CREATOR) && *GENERIC_CREATOR)
+        fields.push_back({"creator", _("Creator:"), GENERIC_CREATOR});
+    if (want(all, flags, HERA_REPORT_CONTRIBUTORS) && *GENERIC_CONTRIBUTORS)
+        fields.push_back({"contributors", _("Contributors:"),
+            structured ? join_list(GENERIC_CONTRIBUTORS) : GENERIC_CONTRIBUTORS, !structured});
     const char* credits = _("translator-credits");
-    if (std::strcmp(credits, "translator-credits") != 0) {
-        do_report_list_string(all, flags, HERA_REPORT_TRANSLATORS, _("Translator:"), _("Translators:"), credits);
-    }
+    if (want(all, flags, HERA_REPORT_TRANSLATORS) && std::strcmp(credits, "translator-credits") != 0)
+        fields.push_back({"translators", _("Translators:"),
+            structured ? join_list(credits) : credits, !structured});
 
+    emit_result(fields, flags);
     return Result(0);
 }
 
 Result about_system(int flags) {
     bool all = flags & HERA_REPORT_ABOUT;
+    bool structured = flags & (HERA_FORMAT_JSON | HERA_FORMAT_YAML);
 
-    do_report_field(all, flags, HERA_REPORT_DESCRIPTION, _("Description:"), HERA_DESCRIPTION);
-    do_report_field(all, flags, HERA_REPORT_HOMEPAGE, _("Homepage:"), HERA_HOMEPAGE);
-    do_report_field(all, flags, HERA_REPORT_VERSION, _("Version:"), HERA_VERSION);
-    do_report_field(all, flags, HERA_REPORT_API, _("API level:"), std::to_string(HERA_API_LEVEL));
-    do_report_field(all, flags, HERA_REPORT_LICENSE, _("License:"), HERA_LICENSE);
-    do_report_field(all, flags, HERA_REPORT_COPYRIGHT, _("Copyright:"), HERA_COPYRIGHT);
-    do_report_field(all, flags, HERA_REPORT_CREATOR, _("Creator:"), HERA_CREATOR);
-
-    do_report_list_string(all, flags, HERA_REPORT_CONTRIBUTORS, _("Contributor:"), _("Contributors:"), HERA_CONTRIBUTORS);
-
+    std::vector<FieldEntry> fields;
+    if (want(all, flags, HERA_REPORT_DESCRIPTION) && *HERA_DESCRIPTION)
+        fields.push_back({"description", _("Description:"), HERA_DESCRIPTION});
+    if (want(all, flags, HERA_REPORT_HOMEPAGE) && *HERA_HOMEPAGE)
+        fields.push_back({"homepage", _("Homepage:"), HERA_HOMEPAGE});
+    if (want(all, flags, HERA_REPORT_VERSION))
+        fields.push_back({"version", _("Version:"), HERA_VERSION});
+    if (want(all, flags, HERA_REPORT_API))
+        fields.push_back({"api_level", _("API level:"), std::to_string(HERA_API_LEVEL)});
+    if (want(all, flags, HERA_REPORT_LICENSE) && *HERA_LICENSE)
+        fields.push_back({"license", _("License:"), HERA_LICENSE});
+    if (want(all, flags, HERA_REPORT_COPYRIGHT) && *HERA_COPYRIGHT)
+        fields.push_back({"copyright", _("Copyright:"), HERA_COPYRIGHT});
+    if (want(all, flags, HERA_REPORT_CREATOR) && *HERA_CREATOR)
+        fields.push_back({"creator", _("Creator:"), HERA_CREATOR});
+    if (want(all, flags, HERA_REPORT_CONTRIBUTORS) && *HERA_CONTRIBUTORS)
+        fields.push_back({"contributors", _("Contributors:"),
+            structured ? join_list(HERA_CONTRIBUTORS) : HERA_CONTRIBUTORS, !structured});
     const char* credits = _("translator-credits");
-    if (std::strcmp(credits, "translator-credits") != 0) {
-        do_report_list_string(all, flags, HERA_REPORT_TRANSLATORS, _("Translator:"), _("Translators:"), credits);
-    }
+    if (want(all, flags, HERA_REPORT_TRANSLATORS) && std::strcmp(credits, "translator-credits") != 0)
+        fields.push_back({"translators", _("Translators:"),
+            structured ? join_list(credits) : credits, !structured});
 
+    emit_result(fields, flags);
     return Result(0);
 }
 
@@ -111,24 +162,45 @@ Result about_module(const char* filename, int flags) {
     }
 
     bool all = flags & HERA_REPORT_ABOUT;
-    do_report_field(all, flags, HERA_REPORT_DESCRIPTION, _("Description:"), header.meta.description.value_or(""));
-    do_report_field(all, flags, HERA_REPORT_HOMEPAGE, _("Homepage:"), header.meta.homepage.value_or(""));
-    do_report_field(all, flags, HERA_REPORT_VERSION, _("Version:"), header.meta.version.value_or(""));
-    do_report_field(all, flags, HERA_REPORT_MODEL, _("Model:"), header.meta.model.value_or(""));
-    do_report_field(all, flags, HERA_REPORT_EPOCH, _("Epoch:"), header.meta.epoch ? std::to_string(*header.meta.epoch) : "");
-    do_report_field(all, flags, HERA_REPORT_LICENSE, _("License:"), header.meta.license.value_or(""));
-    do_report_field(all, flags, HERA_REPORT_COPYRIGHT, _("Copyright:"), header.meta.copyright.value_or(""));
-    do_report_field(all, flags, HERA_REPORT_CREATOR, _("Creator:"), header.meta.creator.value_or(""));
 
-    do_report_list_vector(all, flags, HERA_REPORT_CONTRIBUTORS, _("Contributor:"), _("Contributors:"), header.meta.contributors);
-
-    if ((all || (flags & HERA_REPORT_PROVENANCE)) && header.meta.provenance && !header.meta.provenance->empty()) {
-        std::cout << _("Provenance:") << std::endl;
-        for (const auto& p : *header.meta.provenance) {
-            std::cout << "\t" << p.timestamp << ": " << sanitize::untaint(p.action, false) << std::endl;
+    std::vector<FieldEntry> fields;
+    if (want(all, flags, HERA_REPORT_DESCRIPTION) && header.meta.description)
+        fields.push_back({"description", _("Description:"), *header.meta.description});
+    if (want(all, flags, HERA_REPORT_HOMEPAGE) && header.meta.homepage)
+        fields.push_back({"homepage", _("Homepage:"), *header.meta.homepage});
+    if (want(all, flags, HERA_REPORT_VERSION) && header.meta.version)
+        fields.push_back({"version", _("Version:"), *header.meta.version});
+    if (want(all, flags, HERA_REPORT_MODEL) && header.meta.model)
+        fields.push_back({"model", _("Model:"), *header.meta.model});
+    if (want(all, flags, HERA_REPORT_EPOCH) && header.meta.epoch)
+        fields.push_back({"epoch", _("Epoch:"), std::to_string(*header.meta.epoch)});
+    if (want(all, flags, HERA_REPORT_LICENSE) && header.meta.license)
+        fields.push_back({"license", _("License:"), *header.meta.license});
+    if (want(all, flags, HERA_REPORT_COPYRIGHT) && header.meta.copyright)
+        fields.push_back({"copyright", _("Copyright:"), *header.meta.copyright});
+    if (want(all, flags, HERA_REPORT_CREATOR) && header.meta.creator)
+        fields.push_back({"creator", _("Creator:"), *header.meta.creator});
+    if (want(all, flags, HERA_REPORT_CONTRIBUTORS) && header.meta.contributors) {
+        std::string joined;
+        for (size_t i = 0; i < header.meta.contributors->size(); ++i) {
+            if (i > 0) joined += ", ";
+            joined += (*header.meta.contributors)[i];
         }
+        fields.push_back({"contributors", _("Contributors:"), joined});
+    }
+    if ((all || (flags & HERA_REPORT_PROVENANCE)) && header.meta.provenance
+            && !header.meta.provenance->empty()) {
+        std::string joined;
+        for (size_t i = 0; i < header.meta.provenance->size(); ++i) {
+            if (i > 0) joined += ", ";
+            const auto& p = (*header.meta.provenance)[i];
+            joined += p.timestamp + ": " + sanitize::untaint(p.action, false);
+        }
+        fields.push_back({"provenance", _("Provenance:"), joined});
     }
 
+    emit_result(fields, flags);
     return Result(0);
 }
+
 } // namespace hera

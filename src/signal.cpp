@@ -36,9 +36,15 @@ Result signal(
     namespace fs = std::filesystem;
     fs::path run_dir(run_dir_str);
     
-    int sig = (flags & HERA_SIGKILL) ? SIGKILL : (flags & HERA_SIGTERM) ? SIGTERM : 
-              (flags & HERA_SIGHUP) ? SIGHUP : (flags & HERA_SIGSTOP) ? SIGSTOP :
-              (flags & HERA_SIGCONT) ? SIGCONT : 0;
+    // Semantic signal → OS signal mapping.
+    // STOP/CONT use SIGUSR1/SIGUSR2 so the agent can handle them gracefully.
+    // KILL uses SIGABRT rather than SIGKILL to allow cleanup/core dump.
+    int sig = 0;
+    if      (flags & HERA_SIGSTOP)  sig = SIGUSR1;
+    else if (flags & HERA_SIGCONT)  sig = SIGUSR2;
+    else if (flags & HERA_SIGINT)   sig = SIGQUIT;
+    else if (flags & HERA_SIGTERM)  sig = SIGTERM;
+    else if (flags & HERA_SIGKILL)  sig = SIGABRT;
 
     if (sig == 0) return Result(1);
 
@@ -48,7 +54,7 @@ Result signal(
     std::ifstream ifs(*pid_path_opt);
     PidFileContent info;
     std::string buf((std::istreambuf_iterator<char>(ifs)), std::istreambuf_iterator<char>());
-    if (glz::read_json(info, buf)) return Result(1);
+    if (glz::read<glz::opts{.error_on_unknown_keys = false}>(info, buf)) return Result(1);
 
     if (kill(info.pid, sig) != 0) return Result(1);
 
@@ -63,14 +69,14 @@ Result signal(
 }
 
 Result down(
-    const char * in_dir,
-    const char * run_dir,
-    const char * id_filter,
-    int log_level,
-    int flags
+    const char * /*in_dir*/,
+    const char * /*run_dir*/,
+    const char * /*id_filter*/,
+    int /*log_level*/,
+    int /*flags*/
 ) {
-    // 'down' serves as a high-level alias for sending SIGTERM
-    return signal(in_dir, run_dir, id_filter, log_level, flags | HERA_SIGTERM);
+    ERROR_("Generic plugin does not support 'down' — use a model-specific plugin.");
+    return Result(1);
 }
 
 } // namespace hera

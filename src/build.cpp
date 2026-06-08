@@ -28,7 +28,7 @@ Result build(
     const char * in_fn,
     const char * out_fn,
     const char * uuid_str,
-    const char * callsign_str,
+    const char * nickname_str,
     int flags
 ) {
     ERROR_("Generic plugin does not support 'build' operations");
