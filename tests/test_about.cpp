@@ -23,6 +23,7 @@
 #include <fstream>
 #include "test_generic.hpp"
 #include "generic/internal.hpp"
+#include "hera/utility.hpp"
 
 void test_hera_about_logic() {
     std::cout << "Testing hera_about_logic..." << std::endl;
@@ -37,13 +38,13 @@ void test_hera_about_module_logic() {
     ScopedTestDir env;
     fs::path test_file = env.path / "about_test.beve";
 
-    // Create a minimal file for testing
+    // Create a minimal multipart agent file for testing (JSON header only, no BEVE payload)
     hera::MetaData meta;
     meta.type = "metadata";
     meta.description = "Test Description";
     std::string buf;
-    if (glz::write_beve(meta, buf)) {
-        std::cerr << "Failed to write test BEVE" << std::endl;
+    if (hera::write_json_part(meta, buf)) {
+        std::cerr << "Failed to write test metadata" << std::endl;
     }
     std::ofstream ofs(test_file.string(), std::ios::binary);
     ofs.write(buf.data(), buf.size());
