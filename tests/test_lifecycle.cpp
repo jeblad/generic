@@ -23,6 +23,7 @@
 #include <random>
 #include "test_generic.hpp"
 #include "generic/internal.hpp"
+#include "hera/utility.hpp"
 
 namespace fs = std::filesystem;
 
@@ -37,7 +38,7 @@ void test_hera_install_logic() {
     meta.type = "metadata";
     meta.uuid = "install-uuid";
     std::string buf;
-    if (glz::write_beve(meta, buf)) {
+    if (hera::write_json_part(meta, buf)) {
         std::cerr << "Failed to write test metadata" << std::endl;
     }
     std::ofstream ofs(in_fn, std::ios::binary);
@@ -64,7 +65,7 @@ void test_hera_uninstall_logic() {
     meta.type = "metadata";
     meta.uuid = "install-uuid";
     std::string buf;
-    if (glz::write_beve(meta, buf)) {
+    if (hera::write_json_part(meta, buf)) {
         std::cerr << "Failed to write test metadata" << std::endl;
     }
     std::ofstream ofs(installed_file, std::ios::binary);

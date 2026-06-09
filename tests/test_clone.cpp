@@ -22,6 +22,7 @@
 #include <filesystem>
 #include "test_generic.hpp"
 #include "generic/internal.hpp"
+#include "hera/utility.hpp"
 
 void test_hera_clone_integrity() {
     std::cout << "Testing hera_clone_integrity..." << std::endl;
@@ -37,7 +38,7 @@ void test_hera_clone_integrity() {
     meta.callsign = "Original";
     
     std::string buf;
-    if (glz::write_beve(meta, buf)) {
+    if (hera::write_json_part(meta, buf)) {
         std::cerr << "Failed to write test metadata" << std::endl;
     }
     std::ofstream ofs(in_fn.string(), std::ios::binary);
@@ -50,8 +51,8 @@ void test_hera_clone_integrity() {
     assert(fs::exists(out_fn));
 
     // Verify that the output file can be read
-    hera::MetaData new_meta;
+    hera::AgentHeader new_doc;
     std::string scratch;
-    assert(!hera::read_file(new_meta, out_fn.string().c_str(), scratch));
-    assert(new_meta.uuid == "new-uuid");
+    assert(!hera::read_file(new_doc, out_fn.string(), scratch));
+    assert(new_doc.meta.uuid == "new-uuid");
 }

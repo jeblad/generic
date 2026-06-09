@@ -48,10 +48,11 @@ Result uninstall(
     if (!ifs.read(full_buffer.data(), size)) return Result(1); // Error reading file
 
     size_t offset = 0;
-    if (!glz::read_beve_at(doc.meta, full_buffer, offset) || doc.meta.type != "metadata") {
+    if (auto ec = hera::read_json_part(doc.meta, full_buffer, offset)) {
+        ERROR_FMT_("Failed to read agent metadata from {}: {}", in_fn, glz::format_error(ec, full_buffer));
         return Result(1);
     }
-    
+
     const std::string uuid_val = doc.meta.uuid.value_or("");
     fs::path source_path(in_fn);
     fs::path install_dir = source_path.parent_path();
@@ -76,14 +77,11 @@ Result uninstall(
     doc.meta.provenance->push_back({timestamp, "uninstalled"});
 
     std::string out_buffer;
-    if (glz::write_beve(doc.meta, out_buffer)) { // Check for error
+    if (auto ec = hera::write_json_part(doc.meta, out_buffer)) {
         return Result(1);
     }
-    // Recreates the rest of the file
-    size_t data_offset = 0;
-    MetaData dummy;
-    if (glz::read_beve_at(dummy, full_buffer, data_offset)) {
-        out_buffer.append(full_buffer.data() + data_offset, full_buffer.size() - data_offset);
+    if (offset < full_buffer.size()) {
+        out_buffer.append(full_buffer.data() + offset, full_buffer.size() - offset);
     }
 
     std::ofstream ofs_out(target_path, std::ios::binary);

@@ -22,6 +22,7 @@
 #include <format>
 #include "generic/internal.hpp"
 #include <rlog/rlog.hpp>
+#include "hera/utility.hpp"
 
 namespace hera {
 
@@ -34,7 +35,7 @@ Result install(
     int flags
 ) {
     namespace fs = std::filesystem;
-    FileClone doc;
+    hera::MultipartAgentContent doc;
     std::string full_buffer;
 
     fs::path install_path(out_dir);
@@ -46,7 +47,7 @@ Result install(
             return Result(1);
         }
     }
-    
+
     std::ifstream ifs(in_fn, std::ios::binary | std::ios::ate);
     if (!ifs) return Result(1);
     auto size = ifs.tellg();
@@ -55,7 +56,10 @@ Result install(
     if (!ifs.read(full_buffer.data(), size)) return Result(1);
 
     size_t offset = 0;
-    if (!glz::read_beve_at(doc.meta, full_buffer, offset) || doc.meta.type != "metadata") return Result(1);
+    if (auto ec = hera::read_json_part(doc.meta, full_buffer, offset)) {
+        ERROR_FMT_("Failed to read agent metadata from {}: {}", in_fn, glz::format_error(ec, full_buffer));
+        return Result(1);
+    }
 
     if (offset < full_buffer.size()) {
         doc.remaining_parts.emplace_back(full_buffer.data() + offset, full_buffer.size() - offset);
@@ -79,7 +83,7 @@ Result install(
     doc.meta.provenance->push_back({timestamp, "installed"});
 
     std::string out_buffer;
-    if (glz::write_beve(doc.meta, out_buffer)) {
+    if (auto ec = hera::write_json_part(doc.meta, out_buffer)) {
         return Result(1);
     }
     for (const auto& part : doc.remaining_parts) out_buffer.append(part);

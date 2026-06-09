@@ -43,11 +43,11 @@ Result clone(const char * in_fn, const char * out_fn, const char * uuid_str, con
     if (!ifs.read(full_buffer.data(), size)) return Result(1);
 
     size_t offset = 0;
-    if (!glz::read_beve_at(doc.meta, full_buffer, offset) || doc.meta.type != "metadata") { // Use hera::MultipartAgentContent
-        ERROR_FMT_("Invalid Multipart BEVE: Part 1 is not metadata in {}", in_fn);
+    if (auto ec = hera::read_json_part(doc.meta, full_buffer, offset)) {
+        ERROR_FMT_("Failed to read agent metadata from {}: {}", in_fn, glz::format_error(ec, full_buffer));
         return Result(1);
     }
-    
+
     if (offset < full_buffer.size()) {
         doc.remaining_parts.emplace_back(full_buffer.data() + offset, full_buffer.size() - offset);
     }
@@ -61,7 +61,7 @@ Result clone(const char * in_fn, const char * out_fn, const char * uuid_str, con
     doc.meta.provenance->push_back({timestamp, "cloned"});
 
     std::string out_buffer;
-    if (glz::write_beve(doc.meta, out_buffer)) return Result(1);
+    if (auto ec = hera::write_json_part(doc.meta, out_buffer)) return Result(1);
     for (const auto& part : doc.remaining_parts) out_buffer.append(part);
 
     std::ofstream ofs(out_fn, std::ios::binary);
