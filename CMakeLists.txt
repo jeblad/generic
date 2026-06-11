@@ -14,7 +14,10 @@ set(GENERIC_LICENSE "SEE LICENSE IN LICENSE.txt")
 set(GENERIC_COPYRIGHT "Copyright © 2026 John Erling Blad. All Rights Reserved.")
 set(GENERIC_CREATOR "John Erling Blad")
 set(GENERIC_HOMEPAGE "https://github.com/jeblad/generic")
-set(GENERIC_CONTRIBUTORS "Assisted by Gemini AI (2.5, 3.0, 3.1)")
+set(GENERIC_CONTRIBUTORS
+    "Assisted by Gemini AI (2.5, 3.0, 3.1)"
+    "Assisted by Claude AI (Sonnet 4.6)"
+)
 
 # 1. Project Standards
 set(CMAKE_CXX_STANDARD 20)
