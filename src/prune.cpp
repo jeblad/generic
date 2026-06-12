@@ -67,10 +67,15 @@ Result prune(
         }
         found_any = true;
 
+        bool mmio_exists = !info.mmio_path.empty() && fs::exists(info.mmio_path);
+
         std::cout << stem << "\n"
-                  << "  " << _("PID file:  ") << entry.path().string()  << "  [" << _("found")                      << "]\n"
-                  << "  " << _("BEVE file: ") << info.beve_path          << "  [" << file_status(info.beve_path) << "]\n"
-                  << "  " << _("MMIO file: ") << info.mmio_path          << "  [" << file_status(info.mmio_path) << "]\n";
+                  << "  " << _("PID file:  ") << entry.path().string() << "  [" << _("found")                      << "]\n"
+                  << "  " << _("BEVE file: ") << info.beve_path         << "  [" << file_status(info.beve_path) << "]\n"
+                  << "  " << _("MMIO file: ") << info.mmio_path         << "  [" << file_status(info.mmio_path) << "]\n";
+
+        if (mmio_exists)
+            std::cout << "  " << _("hint: MMIO state is available — run 'hera rebuild ") << stem << _("' to recover.\n");
 
         if (flags & HERA_FORCE) {
             std::error_code ec;
