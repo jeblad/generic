@@ -41,7 +41,7 @@ Result prune(
             if (!glz::read_json(info, buf)) {
                 if (kill(info.pid, 0) != 0 && errno == ESRCH) {
                     fs::remove(entry.path());
-                    WARNING_FMT_(_("Agent {} ({}) was found without a running process."), entry.path().stem().string(), info.filename);
+                    WARNING_FMT_(_("Agent {} ({}) was found without a running process."), entry.path().stem().string(), info.beve_path);
                 }
             }
         }
