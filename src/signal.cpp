@@ -61,15 +61,4 @@ Result signal(
     return Result(0);
 }
 
-Result down(
-    const char * /*in_dir*/,
-    const char * /*run_dir*/,
-    const char * /*id_filter*/,
-    int /*log_level*/,
-    int /*flags*/
-) {
-    ERROR_("Generic plugin does not support 'down' — use a model-specific plugin.");
-    return Result(1);
-}
-
 } // namespace hera

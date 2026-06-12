@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: generic\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-05-06 19:05+0200\n"
+"POT-Creation-Date: 2026-06-13 00:37+0200\n"
 "PO-Revision-Date: 2026-05-06 05:22+0200\n"
 "Last-Translator: John Erling Blad <jeblad@gmail.com>\n"
 "Language-Team: Norwegian Bokmål\n"
@@ -21,8 +21,8 @@ msgstr ""
 #: /home/john/spaces/generic/src/generic.cpp:80
 #: /home/john/spaces/generic/src/generic.cpp:95
 #: /home/john/spaces/generic/src/generic.cpp:109
-#: /home/john/spaces/generic/src/generic.cpp:135
-#: /home/john/spaces/generic/src/generic.cpp:150
+#: /home/john/spaces/generic/src/generic.cpp:122
+#: /home/john/spaces/generic/src/generic.cpp:137
 #, c++-format
 msgid "Entered {}()"
 msgstr "Gikk inn i {}()"

@@ -100,7 +100,7 @@ void test_hera_prune_logic() {
     fs::path run_dir = env.path / "test_run";
     fs::create_directories(run_dir);
     // Prune should return success
-    assert(hera::prune(nullptr, run_dir.string().c_str(), 0, 0).code == 0);
+    assert(hera::prune(run_dir.string().c_str(), nullptr, 0, 0).code == 0);
 }
 
 void test_hera_signal_logic() {
@@ -111,11 +111,6 @@ void test_hera_signal_logic() {
     assert(hera::signal(env.path.c_str(), env.path.c_str(), "non-existent", 0, HERA_SIGTERM).code == 1);
 }
 
-void test_hera_down_logic() {
-    std::cout << "Testing hera_down_logic..." << std::endl;
-    ScopedTestDir env;
-    assert(hera::down(env.path.c_str(), env.path.c_str(), "non-existent", 0, 0).code == 1);
-}
 
 void test_hera_signal_stop_cont_logic() {
     std::cout << "Testing hera_signal_stop_cont_logic..." << std::endl;

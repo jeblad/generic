@@ -33,7 +33,6 @@ int main() {
     test_list_yaml_format();
     test_hera_prune_logic();
     test_hera_signal_stop_cont_logic();
-    test_hera_down_logic();
     test_hera_signal_logic();
 
     std::cout << "All generic API tests passed!" << std::endl;

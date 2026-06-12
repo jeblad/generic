@@ -110,19 +110,6 @@ extern "C" {
         return hera::signal(in_dir, run_dir, id_filter, log_level, flags);
     }
 
-    HERA_EXPORT hera::Result hera_down(
-        const char * in_dir,
-        const char * run_dir,
-        const char * id_filter,
-        int log_level,
-        int flags
-    ) {
-        rlog::openreport(log_level);
-        hera::set_uuid(id_filter ? id_filter : "");
-        hera::set_command("down");
-        return hera::down(in_dir, run_dir, id_filter, log_level, flags);
-    }
-
     HERA_EXPORT hera::Result hera_prune(
         const char * in_dir,
         const char * run_dir,
