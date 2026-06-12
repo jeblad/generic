@@ -39,14 +39,6 @@ Result install(
     std::string full_buffer;
 
     fs::path install_path(out_dir);
-    fs::path run_dir = (install_path.filename() == "lib") ? install_path.parent_path() / "run" : fs::path("/run") / PROJECT_NAME;
-
-    if (uuid_str) {
-        if (fs::exists(run_dir / (std::string(uuid_str) + ".pid"))) {
-            ERROR_FMT_("Installation aborted: Agent {} is already running.", uuid_str);
-            return Result(1);
-        }
-    }
 
     std::ifstream ifs(in_fn, std::ios::binary | std::ios::ate);
     if (!ifs) return Result(1);

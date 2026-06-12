@@ -74,8 +74,8 @@ Result down(
 );
 
 Result prune(
-    const char * in_dir,
     const char * run_dir,
+    const char * id_filter,
     int log_level,
     int flags
 );
