@@ -58,13 +58,6 @@ Result signal(
 
     if (kill(info.pid, sig) != 0) return Result(1);
 
-    if (sig == SIGTERM || sig == SIGKILL) {
-        std::this_thread::sleep_for(std::chrono::milliseconds(100));
-        if (kill(info.pid, 0) != 0 && errno == ESRCH) {
-            fs::remove(*pid_path_opt);
-            NOTICE_FMT_("Agent {} terminated.", id_filter);
-        }
-    }
     return Result(0);
 }
 
