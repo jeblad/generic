@@ -116,7 +116,8 @@ Result list(
                 PidFileContent info;
                 std::string pbuf((std::istreambuf_iterator<char>(ifs_pid)),
                                   std::istreambuf_iterator<char>());
-                if (!glz::read_json(info, pbuf)) pid_str = std::to_string(info.pid);
+                if (!glz::read_json(info, pbuf) && ::kill(info.pid, 0) == 0)
+                    pid_str = std::to_string(info.pid);
             }
         }
 
