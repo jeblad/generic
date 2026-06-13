@@ -97,10 +97,14 @@ void test_hera_prune_logic() {
     std::cout << "Testing hera_prune_logic..." << std::endl;
     namespace fs = std::filesystem;
     ScopedTestDir env;
-    fs::path run_dir = env.path / "test_run";
+    fs::path state_dir = env.path / "test_state";
+    fs::path run_dir   = env.path / "test_run";
+    fs::path cache_dir = env.path / "test_cache";
+    fs::create_directories(state_dir);
     fs::create_directories(run_dir);
-    // Prune should return success
-    assert(hera::prune(run_dir.string().c_str(), nullptr, 0, 0).code == 0);
+    fs::create_directories(cache_dir);
+    // Empty state_dir → no BEVE anchor → prune returns success immediately
+    assert(hera::prune(state_dir.string().c_str(), run_dir.string().c_str(), cache_dir.string().c_str(), nullptr, 0, 0).code == 0);
 }
 
 void test_hera_signal_logic() {
