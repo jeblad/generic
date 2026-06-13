@@ -37,6 +37,7 @@ Result signal(
     fs::path run_dir(run_dir_str);
     
     // Semantic signal → OS signal mapping.
+    // HUP  uses SIGHUP for checkpoint (save BEVE, continue running).
     // STOP/CONT use SIGUSR1/SIGUSR2 so the agent can handle them gracefully.
     // KILL uses SIGABRT rather than SIGKILL to allow cleanup/core dump.
     int sig = 0;
@@ -45,6 +46,7 @@ Result signal(
     else if (flags & HERA_SIGINT)   sig = SIGQUIT;
     else if (flags & HERA_SIGTERM)  sig = SIGTERM;
     else if (flags & HERA_SIGKILL)  sig = SIGABRT;
+    else if (flags & HERA_SIGHUP)   sig = SIGHUP;
 
     if (sig == 0) return Result(1);
 
