@@ -67,7 +67,9 @@ Result signal(
 
 
 Result prune(
+    const char * state_dir,
     const char * run_dir,
+    const char * cache_dir,
     const char * id_filter,
     int log_level,
     int flags

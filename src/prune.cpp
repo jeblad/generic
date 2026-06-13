@@ -1,5 +1,5 @@
 /**
- * generic – the "prune" subcommand implementation
+ * generic – the "prune", "clean", and "destroy" subcommand implementation
  * Copyright © 2026 John Erling Blad. All Rights Reserved.
  *
  * Protected as a work of art under the Norwegian Copyright Act (Åndsverksloven).
@@ -21,68 +21,130 @@
 #include <fstream>
 #include <iostream>
 #include <string>
+#include <vector>
 #include "generic/internal.hpp"
 #include "hera/utility.hpp"
+#include "uuid_ext/uuid_ext.hpp"
 #include <rlog/rlog.hpp>
 
 namespace hera {
 
-static std::string file_status(const std::string& path) {
-    if (path.empty())         return _("not set");
-    if (std::filesystem::exists(path)) return _("found");
-    return _("missing");
+namespace {
+
+struct AgentFiles {
+    std::string stem;             // beve stem (UUID with dashes)
+    std::filesystem::path beve;
+    std::filesystem::path pid;    // empty if not found
+    std::filesystem::path mmio;   // empty if not found
+    bool running{false};
+};
+
+static std::string file_status(const std::filesystem::path& p) {
+    return p.empty() ? _("missing") : (std::filesystem::exists(p) ? _("found") : _("missing"));
 }
 
+static void try_remove(const std::filesystem::path& p, bool force) {
+    if (p.empty() || !std::filesystem::exists(p)) return;
+    if (!force) {
+        std::cout << "    " << _("would remove: ") << p.string() << "\n";
+        return;
+    }
+    std::error_code ec;
+    std::filesystem::remove(p, ec);
+    if (ec) WARNING_FMT_(_("Failed to remove {}: {}"), p.string(), ec.message());
+    else    std::cout << "    " << _("removed: ") << p.string() << "\n";
+}
+
+} // anonymous namespace
+
 Result prune(
-    const char * run_dir_str,
-    const char * id_filter,
+    const char* state_dir_str,
+    const char* run_dir_str,
+    const char* cache_dir_str,
+    const char* id_filter,
     int /*log_level*/,
     int flags
 ) {
     namespace fs = std::filesystem;
-    fs::path run_dir(run_dir_str);
-    if (!fs::exists(run_dir)) return Result(0);
 
+    fs::path state_dir(state_dir_str ? state_dir_str : "");
+    fs::path run_dir(run_dir_str   ? run_dir_str   : "");
+    fs::path cache_dir(cache_dir_str ? cache_dir_str : "");
     std::string filter = id_filter ? id_filter : "";
-    bool found_any = false;
 
-    for (const auto& entry : fs::directory_iterator(run_dir)) {
-        if (entry.path().extension() != ".pid") continue;
+    bool remove_mmio = (flags & HERA_REMOVE_MMIO) != 0;
+    bool remove_beve = (flags & HERA_REMOVE_BEVE) != 0;
+    bool force       = (flags & HERA_FORCE) != 0;
+
+    if (state_dir.empty() || !fs::exists(state_dir)) return Result(0);
+
+    // Collect candidate agents from state_dir (BEVE files are the anchor).
+    std::vector<AgentFiles> candidates;
+
+    for (const auto& entry : fs::directory_iterator(state_dir)) {
+        if (entry.path().extension() != ".beve") continue;
 
         std::string stem = entry.path().stem().string();
         if (!filter.empty() && stem.find(filter) == std::string::npos) continue;
 
-        std::ifstream ifs(entry.path());
-        PidFileContent info;
-        std::string buf((std::istreambuf_iterator<char>(ifs)), std::istreambuf_iterator<char>());
-        if (glz::read<glz::opts{.error_on_unknown_keys = false}>(info, buf)) continue;
+        AgentFiles af;
+        af.stem = stem;
+        af.beve = entry.path();
 
-        // Only report/act on daemons whose process is dead.
-        if (kill(info.pid, 0) == 0 || errno != ESRCH) continue;
+        // Derive base-36 UUID stem for PID and MMIO filenames.
+        // The BEVE stem is the UUID in standard format (with dashes).
+        std::string base36_stem = stem;
+        auto uuid = uuid_ext::UUID::parse(stem);
+        if (uuid.get() != 0) base36_stem = uuid.to_base_string(36);
 
-        // Exactly one match required when id_filter is set — enforce below.
-        if (!filter.empty() && found_any) {
-            ERROR_FMT_(_("Identifier '{}' matched more than one entry."), filter);
-            return Result(1);
+        // Look up PID file.
+        if (!run_dir.empty() && fs::exists(run_dir)) {
+            auto pid_opt = find_pid_file(run_dir, stem);
+            if (pid_opt) af.pid = *pid_opt;
         }
-        found_any = true;
 
-        bool mmio_exists = !info.mmio_path.empty() && fs::exists(info.mmio_path);
-
-        std::cout << stem << "\n"
-                  << "  " << _("PID file:  ") << entry.path().string() << "  [" << _("found")                      << "]\n"
-                  << "  " << _("BEVE file: ") << info.beve_path         << "  [" << file_status(info.beve_path) << "]\n"
-                  << "  " << _("MMIO file: ") << info.mmio_path         << "  [" << file_status(info.mmio_path) << "]\n";
-
-        if (mmio_exists)
-            std::cout << "  " << _("hint: MMIO state is available — run 'hera rebuild ") << stem << _("' to recover.\n");
-
-        if (flags & HERA_FORCE) {
-            std::error_code ec;
-            fs::remove(entry.path(), ec);
-            if (ec) WARNING_FMT_(_("Failed to remove PID file {}: {}"), entry.path().string(), ec.message());
-            else    NOTICE_FMT_(_("Removed stale PID file for agent {}."), stem);
+        // Look up MMIO file.
+        if (!cache_dir.empty() && fs::exists(cache_dir)) {
+            fs::path mmio_candidate = cache_dir / (base36_stem + ".mmio");
+            if (fs::exists(mmio_candidate)) af.mmio = mmio_candidate;
         }
+
+        // Check liveness.
+        af.running = !af.pid.empty() && is_agent_running(run_dir, stem);
+
+        if (af.running) continue;
+
+        candidates.push_back(std::move(af));
+    }
+
+    if (candidates.empty()) return Result(0);
+
+    // If a specific id was requested and matched a running daemon, that is an error.
+    if (!filter.empty()) {
+        for (const auto& af : candidates) {
+            if (af.running) {
+                ERROR_FMT_(_("Agent {} is still running. Stop it before cleaning up."), af.stem);
+                return Result(1);
+            }
+        }
+    }
+
+    // Report and optionally remove.
+    for (const auto& af : candidates) {
+        std::cout << af.stem << "\n"
+                  << "  " << _("BEVE file: ") << af.beve.string()  << "  [" << file_status(af.beve) << "]\n"
+                  << "  " << _("MMIO file: ") << af.mmio.string()  << "  [" << file_status(af.mmio) << "]\n"
+                  << "  " << _("PID file:  ") << af.pid.string()   << "  [" << file_status(af.pid)  << "]\n";
+
+        if (!af.mmio.empty() && !remove_mmio && !remove_beve)
+            std::cout << "  " << rlog::i18n::format(
+                _("hint: MMIO state is available — run 'hera rebuild {}' to recover."), af.stem) << "\n";
+
+        if (!force) std::cout << "  " << _("(use --force to remove)\n");
+
+        if (remove_beve) try_remove(af.beve, force);
+        if (remove_mmio) try_remove(af.mmio, force);
+        try_remove(af.pid, force);
     }
 
     return Result(0);

@@ -111,8 +111,10 @@ extern "C" {
     }
 
     HERA_EXPORT hera::Result hera_prune(
-        const char * in_dir,
+        const char * state_dir,
         const char * run_dir,
+        const char * cache_dir,
+        const char * id_filter,
         int log_level,
         int flags
     ) {
@@ -120,7 +122,7 @@ extern "C" {
         hera::set_uuid("");
         hera::set_command("prune");
         DEBUG_FMT_("Entered {}()", __func__);
-        return hera::prune(in_dir, run_dir, log_level, flags);
+        return hera::prune(state_dir, run_dir, cache_dir, id_filter, log_level, flags);
     }
 
     HERA_EXPORT hera::Result hera_list(
