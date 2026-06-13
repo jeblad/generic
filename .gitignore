@@ -2,6 +2,9 @@
 *.mo
 *.gmo
 
+# cmake user-local presets
+CMakeUserPresets.json
+
 # Prerequisites
 *.d
 
