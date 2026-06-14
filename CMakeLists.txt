@@ -160,12 +160,14 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/cmake/Gettext_helpers.cmake")
     )
 endif()
 
-add_library(generic MODULE 
+add_library(generic MODULE
     src/generic.cpp
     src/clone.cpp
     src/build.cpp
     src/install.cpp
     src/uninstall.cpp
+    src/import.cpp
+    src/export.cpp
     src/list.cpp
     src/signal.cpp
     src/prune.cpp
@@ -208,7 +210,7 @@ option(BUILD_TESTING "Build unit tests for the plugin" ON)
 if(BUILD_TESTING)
     enable_testing()
     
-    add_executable(test_generic 
+    add_executable(test_generic
         tests/test_main.cpp
         tests/test_utility.cpp
         tests/test_about.cpp
@@ -220,6 +222,8 @@ if(BUILD_TESTING)
         src/build.cpp
         src/install.cpp
         src/uninstall.cpp
+        src/import.cpp
+        src/export.cpp
         src/list.cpp
         src/signal.cpp
         src/prune.cpp

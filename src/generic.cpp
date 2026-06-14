@@ -140,6 +140,36 @@ extern "C" {
         return hera::list(in_dir, run_dir, id_filter, fields, log_level, flags);
     }
 
+    HERA_EXPORT hera::Result hera_import(
+        const char * from_dir,
+        const char * workspace_dir,
+        const char * uuid_str,
+        const char * nickname_str,
+        int log_level,
+        int flags
+    ) {
+        rlog::openreport(log_level);
+        hera::set_uuid(uuid_str ? uuid_str : "");
+        hera::set_command("import");
+        DEBUG_FMT_("Entered {}()", __func__);
+        return hera::agent_import(from_dir, workspace_dir, uuid_str, nickname_str, log_level, flags);
+    }
+
+    HERA_EXPORT hera::Result hera_export(
+        const char * workspace_dir,
+        const char * to_dir,
+        const char * uuid_str,
+        const char * nickname_str,
+        int log_level,
+        int flags
+    ) {
+        rlog::openreport(log_level);
+        hera::set_uuid(uuid_str ? uuid_str : "");
+        hera::set_command("export");
+        DEBUG_FMT_("Entered {}()", __func__);
+        return hera::agent_export(workspace_dir, to_dir, uuid_str, nickname_str, log_level, flags);
+    }
+
     HERA_EXPORT hera::Result hera_about_system(
         const char * /*in_fn*/,
         const char * /*out_fn*/,

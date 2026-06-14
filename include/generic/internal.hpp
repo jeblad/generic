@@ -79,4 +79,22 @@ Result about_system(int flags);
 Result about_plugin(int flags);
 Result about_module(const char* filename, int flags);
 
+Result agent_import(
+    const char* from_dir,
+    const char* workspace_dir,
+    const char* uuid_str,
+    const char* nickname_str,
+    int log_level,
+    int flags
+);
+
+Result agent_export(
+    const char* workspace_dir,
+    const char* to_dir,
+    const char* uuid_str,
+    const char* nickname_str,
+    int log_level,
+    int flags
+);
+
 } // namespace hera
