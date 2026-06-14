@@ -2,6 +2,8 @@
 *.mo
 *.gmo
 
+temp/
+
 # cmake user-local presets
 CMakeUserPresets.json
 

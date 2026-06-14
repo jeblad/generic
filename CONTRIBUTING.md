@@ -1,42 +1,24 @@
-# Contributing to generic
+# Contributing
 
-Thank you for your interest in **generic**. Because this project is protected as an original literary and artistic work under the **Norwegian Copyright Act (Åndsverksloven)**, the contribution process differs significantly from standard open-source projects.
+Yes, contributions are welcome, provided they align with the project's goals.
 
-This is a private repository. Access is granted by invitation only for the purposes of **exhibition, private study, and academic peer review**.
+## The Nature of This Project
 
-## 1. Scope of Engagement
+This project is an evolving cognitive architecture, partially rooted in my research from the 1990s. It is not intended for commercial or industrial use, but rather as an ongoing exploration of autonomous systems. 
 
-Consistent with the `LICENSE.txt`, no permission is granted for "adaptations" (*bearbeidelse*) of this work. Consequently:
+## Legal Framework
 
-* **No Pull Requests for features:** We do not accept contributions that alter the artistic expression or functional logic of the model.
-* **Peer Review:** We welcome critique and academic discussion regarding the heuristic reasoning methods implemented here.
-* **Security Reports:** If you discover a vulnerability that could compromise the integrity of the exhibition, please report it via the "Issues" tab or directly to the author.
+Before contributing, please note that this project is governed by the `LEGAL_NOTICE.md` file found in this repository. All contributions become part of a proprietary cognitive architecture. By submitting code, you acknowledge that John Erling Blad retains sole authority over the licensing, status, and legal disposition of the work, as detailed in the Governance section of the Legal Notice.
 
-## 2. Feedback via Issues
+## How to Contribute
 
-Invited peers are encouraged to use the GitHub Issues tracker for:
+If you wish to share your work:
 
-* **Conceptual Feedback:** Observations on the architecture and its alignment with heuristic reasoning principles.
-* **Technical Observations:** Documentation of unexpected behavior or edge cases discovered during study.
-* **Compliance:** Discussions regarding the work's status under *Åndsverksloven*.
+1. Fork this repository.
+2. Develop your contribution in your own branch.
+3. Submit a Pull Request from your branch.
+4. Ensure your code complies with the project's linting standards and is verified for quality.
 
-## 3. Pull Requests (By Explicit Request Only)
+## Intellectual Property
 
-In rare cases, the author may request a specific technical fix (e.g., build system corrections).
-
-By submitting a Pull Request, you acknowledge that:
-
-1. Your contribution is provided as a gift to the author to maintain the work's integrity.
-2. You waive any claim to derivative authorship that would conflict with the author's exclusive rights under § 6 of *Åndsverksloven*.
-3. The author retains sole discretion over whether to incorporate the change.
-
-## 4. Code of Conduct
-
-This project is an artistic exhibition. We expect all invited parties to maintain a professional and respectful tone during peer review. 
-
-## 5. Inspiration vs. Adaptation
-
-As stated in the license, you are encouraged to use this work as **inspiration** to create entirely new and independent works of art. If you create a work inspired by generic, we would love to hear about it, provided it does not infringe upon the original expression contained herein.
-
----
-*For any usage or contribution questions beyond this scope, please contact the author directly at the address listed in the project metadata.*
+Please be aware that this project is subject to ongoing refinement, and its legal status and architectural boundaries are managed exclusively by the primary author. Contributions are accepted with the understanding that they will be integrated into this specific intellectual property framework.
