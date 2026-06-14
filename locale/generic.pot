@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-13 19:51+0200\n"
+"POT-Creation-Date: 2026-06-14 22:36+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,6 +24,9 @@ msgstr ""
 #: /home/john/spaces/generic/src/generic.cpp:109
 #: /home/john/spaces/generic/src/generic.cpp:124
 #: /home/john/spaces/generic/src/generic.cpp:139
+#: /home/john/spaces/generic/src/generic.cpp:154
+#: /home/john/spaces/generic/src/generic.cpp:169
+#: /home/john/spaces/generic/src/generic.cpp:184
 #, c++-format
 msgid "Entered {}()"
 msgstr ""
