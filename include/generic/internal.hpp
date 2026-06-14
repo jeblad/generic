@@ -79,6 +79,15 @@ Result about_system(int flags);
 Result about_plugin(int flags);
 Result about_module(const char* filename, int flags);
 
+Result agent_init(
+    const char* model_lib,
+    const char* workspace_dir,
+    const char* model_name,
+    const char* nickname_str,
+    int log_level,
+    int flags
+);
+
 Result agent_import(
     const char* from_dir,
     const char* workspace_dir,

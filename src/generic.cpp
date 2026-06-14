@@ -140,6 +140,21 @@ extern "C" {
         return hera::list(in_dir, run_dir, id_filter, fields, log_level, flags);
     }
 
+    HERA_EXPORT hera::Result hera_init(
+        const char * model_lib,
+        const char * workspace_dir,
+        const char * model_name,
+        const char * nickname_str,
+        int log_level,
+        int flags
+    ) {
+        rlog::openreport(log_level);
+        hera::set_uuid("");
+        hera::set_command("init");
+        DEBUG_FMT_("Entered {}()", __func__);
+        return hera::agent_init(model_lib, workspace_dir, model_name, nickname_str, log_level, flags);
+    }
+
     HERA_EXPORT hera::Result hera_import(
         const char * from_dir,
         const char * workspace_dir,

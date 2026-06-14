@@ -164,6 +164,7 @@ add_library(generic MODULE
     src/generic.cpp
     src/clone.cpp
     src/build.cpp
+    src/init.cpp
     src/install.cpp
     src/uninstall.cpp
     src/import.cpp
@@ -220,6 +221,7 @@ if(BUILD_TESTING)
         src/generic.cpp
         src/clone.cpp
         src/build.cpp
+        src/init.cpp
         src/install.cpp
         src/uninstall.cpp
         src/import.cpp
