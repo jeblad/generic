@@ -19,10 +19,16 @@
 #include <iostream>
 #include <sstream>
 #include <cassert>
+#include <cerrno>
+#include <csignal>
 #include <filesystem>
 #include <fstream>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <unistd.h>
 #include "test_generic.hpp"
 #include "generic/internal.hpp"
+#include "hera/metadata.hpp"
 
 void test_hera_list_logic() {
     std::cout << "Testing hera_list_logic..." << std::endl;
@@ -122,4 +128,97 @@ void test_hera_signal_stop_cont_logic() {
     // Verifies flag handling
     assert(hera::signal(env.path.c_str(), env.path.c_str(), "none", 0, HERA_SIGSTOP).code == 1);
     assert(hera::signal(env.path.c_str(), env.path.c_str(), "none", 0, HERA_SIGCONT).code == 1);
+}
+
+void test_hera_down_logic() {
+    std::cout << "Testing hera_down_logic..." << std::endl;
+    namespace fs = std::filesystem;
+
+    // Auto-reap children so kill(pid, 0) returns ESRCH once the child dies.
+    // Without this, a terminated child becomes a zombie and kill(pid, 0) still
+    // returns 0, making the polling loop in down() think the process is alive.
+    signal(SIGCHLD, SIG_IGN);
+
+    auto write_pid_file = [](const fs::path& run_dir, const std::string& stem, pid_t pid) {
+        hera::PidFileContent info;
+        info.pid       = static_cast<int>(pid);
+        info.beve_path = (run_dir / (stem + ".beve")).string();
+        info.mmio_path = (run_dir / (stem + ".mmio")).string();
+        info.status    = "running";
+        std::string json;
+        assert(!glz::write_json(info, json));
+        std::ofstream ofs(run_dir / (stem + ".pid"));
+        ofs << json;
+    };
+
+    // Part 1: No PID file present → down() must fail immediately
+    {
+        ScopedTestDir env;
+        fs::path run_dir = env.path / "run";
+        fs::create_directories(run_dir);
+        assert(hera::down("", run_dir.string().c_str(), "non-existent", 0, 0).code != 0);
+    }
+
+    // Part 2: Process exits gracefully on SIGTERM → code 0, PID file removed
+    {
+        ScopedTestDir env;
+        fs::path run_dir = env.path / "run";
+        fs::create_directories(run_dir);
+
+        pid_t pid = fork();
+        assert(pid >= 0);
+        if (pid == 0) {
+            // Child: block until a signal arrives; default SIGTERM handler terminates.
+            pause();
+            _exit(0);
+        }
+        write_pid_file(run_dir, "graceful-agent", pid);
+
+        auto r = hera::down("", run_dir.string().c_str(), "graceful-agent", 0, 0);
+        assert(r.code == 0);
+        assert(!fs::exists(run_dir / "graceful-agent.pid"));
+    }
+
+    // Part 3: Process ignores SIGTERM, no --force → error after 5 s wait; PID file remains
+    // NOTE: slow test — waits the full 5-second timeout in down()
+    {
+        ScopedTestDir env;
+        fs::path run_dir = env.path / "run";
+        fs::create_directories(run_dir);
+
+        pid_t pid = fork();
+        assert(pid >= 0);
+        if (pid == 0) {
+            signal(SIGTERM, SIG_IGN);
+            pause(); // won't be interrupted by SIGTERM; only SIGKILL can stop us
+            _exit(0);
+        }
+        write_pid_file(run_dir, "stubborn-agent", pid);
+
+        auto r = hera::down("", run_dir.string().c_str(), "stubborn-agent", 0, 0);
+        assert(r.code != 0);
+        assert(fs::exists(run_dir / "stubborn-agent.pid"));
+        ::kill(pid, SIGKILL); // clean up child
+    }
+
+    // Part 4: Process ignores SIGTERM, --force → SIGKILL, code 0, PID file removed
+    // NOTE: slow test — waits the full 5-second timeout before escalating to SIGKILL
+    {
+        ScopedTestDir env;
+        fs::path run_dir = env.path / "run";
+        fs::create_directories(run_dir);
+
+        pid_t pid = fork();
+        assert(pid >= 0);
+        if (pid == 0) {
+            signal(SIGTERM, SIG_IGN);
+            pause();
+            _exit(0);
+        }
+        write_pid_file(run_dir, "stubborn-agent", pid);
+
+        auto r = hera::down("", run_dir.string().c_str(), "stubborn-agent", 0, HERA_FORCE);
+        assert(r.code == 0);
+        assert(!fs::exists(run_dir / "stubborn-agent.pid"));
+    }
 }

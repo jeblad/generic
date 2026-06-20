@@ -16,20 +16,13 @@
  * See the full text at LICENSE.txt
  **/
 
-#include <cerrno>
 #include <chrono>
-#include <csignal>
-#include <cstring>
-#include <filesystem>
 #include <format>
-#include <fstream>
 #include <string>
-#include <thread>
 
 #include "hera/config.h"
 #include <rlog/rlog.hpp>
 #include "hera/hera.hpp"
-#include "hera/utility.hpp"
 #include "generic/internal.hpp"
 
 namespace hera {
@@ -118,8 +111,8 @@ extern "C" {
     }
 
     HERA_EXPORT hera::Result hera_down(
-        const char * /*in_dir*/,
-        const char * run_dir_str,
+        const char * in_dir,
+        const char * run_dir,
         const char * id_filter,
         int log_level,
         int flags
@@ -128,56 +121,7 @@ extern "C" {
         hera::set_uuid(id_filter ? id_filter : "");
         hera::set_command("down");
         DEBUG_FMT_("Entered {}()", __func__);
-
-        namespace fs = std::filesystem;
-        fs::path run_dir(run_dir_str ? run_dir_str : "");
-
-        auto pid_path_opt = hera::find_pid_file(run_dir, id_filter ? id_filter : "");
-        if (!pid_path_opt) {
-            ERROR_FMT_("No PID file found for agent: {}", id_filter ? id_filter : "<any>");
-            return {1};
-        }
-
-        std::ifstream ifs(*pid_path_opt);
-        std::string buf((std::istreambuf_iterator<char>(ifs)),
-                         std::istreambuf_iterator<char>());
-        hera::PidFileContent info;
-        if (glz::read_json(info, buf)) {
-            ERROR_("Failed to read PID file.");
-            return {1};
-        }
-
-        if (::kill(info.pid, SIGTERM) != 0) {
-            ERROR_FMT_("Failed to send SIGTERM to PID {}: {}", info.pid, std::strerror(errno));
-            return {1};
-        }
-
-        constexpr int MAX_WAIT_MS = 5000;
-        constexpr int POLL_MS     = 100;
-        bool stopped = false;
-        for (int elapsed = 0; elapsed < MAX_WAIT_MS; elapsed += POLL_MS) {
-            std::this_thread::sleep_for(std::chrono::milliseconds(POLL_MS));
-            if (::kill(info.pid, 0) != 0 && errno == ESRCH) {
-                stopped = true;
-                break;
-            }
-        }
-
-        if (!stopped) {
-            if (flags & HERA_FORCE) {
-                WARNING_FMT_("Agent {} did not stop in time — sending SIGKILL.", id_filter ? id_filter : "");
-                ::kill(info.pid, SIGKILL);
-                std::this_thread::sleep_for(std::chrono::milliseconds(POLL_MS));
-            } else {
-                WARNING_FMT_("Agent {} did not stop within 5 s; use --force to send SIGKILL.", id_filter ? id_filter : "");
-                return {1};
-            }
-        }
-
-        std::error_code ec;
-        fs::remove(*pid_path_opt, ec);
-        NOTICE_FMT_("Agent {} stopped.", id_filter ? id_filter : "");
-        return {0};
+        return hera::down(in_dir, run_dir, id_filter, log_level, flags);
     }
 
     HERA_EXPORT hera::Result hera_prune(

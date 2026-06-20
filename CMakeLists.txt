@@ -171,6 +171,7 @@ add_library(generic MODULE
     src/export.cpp
     src/list.cpp
     src/signal.cpp
+    src/down.cpp
     src/prune.cpp
     src/about.cpp
 )
@@ -228,6 +229,7 @@ if(BUILD_TESTING)
         src/export.cpp
         src/list.cpp
         src/signal.cpp
+        src/down.cpp
         src/prune.cpp
         src/about.cpp
     )
