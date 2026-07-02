@@ -1,25 +1,27 @@
 # Intellectual Property and Usage Notice
 
-**Version 1.0 - June 2026**
+**Version 1.1 - July 2026**
 
 This repository contains parts of the cognitive engine (architecture) for an autonomous episodic memory system. The work is governed by the Norwegian Copyright Act (Åndsverksloven).
 
 **By accessing, downloading, or executing any part of this code, you agree to these terms.**
 
+All components of this work are proprietary. Use is strictly limited to personal, non-commercial, and non-military purposes. Redistribution or integration into commercial or industrial environments is prohibited.
+
 ## 1. Management Interface (Software)
 
-The management software is proprietary. Use is strictly limited to personal, non-commercial, and non-military purposes. Redistribution or integration into commercial or industrial environments is prohibited.
+The management interface comprises the hera command-line tool, its subcommands, plugin framework, and associated security infrastructure. It runs and controls the cognitive engine as a service.
 
-## 2. Cognitive Engine (Architecture)
+## 2. Cognitive Engine (Plugin with Service) – this entity
 
-This is an original artistic and technical expression of a cognitive architecture for episodic memory. The architecture's logic is proprietary.
+This is an original artistic and technical expression of a cognitive architecture for episodic memory. The cognitive engine executes as a service under control of the management interface.
 
 * Any form of adaptation, reproduction, or reconstruction of this logic is prohibited.
 * Unauthorized inclusion of this architecture in other agentic frameworks or AI training datasets is strictly forbidden.
 
-## 3. Episodic Dataset (Agent Identity)
+## 3. Episodic Dataset (Agent)
 
-The dataset constitutes the cognitive continuity and "identity" of the agent.
+The dataset constitutes the cognitive continuity and identity of the agent, running as an integral part of the service.
 
 * Any extraction, cloning, or usage of this data for the purposes of training, testing, or mirroring the agent's behavior is strictly prohibited.
 

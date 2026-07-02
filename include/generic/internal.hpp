@@ -1,3 +1,10 @@
+/**
+ * generic – internal function declarations for the generic plugin
+ * Copyright © 2026 John Erling Blad. All Rights Reserved.
+ * Protected under the Norwegian Copyright Act (Åndsverksloven).
+ * See LEGAL_NOTICE.md for terms of use.
+ **/
+
 #pragma once
 #include <string>
 #include <vector>
