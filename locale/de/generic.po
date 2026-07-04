@@ -1,4 +1,4 @@
-# Norwegian Nynorsk translations for generic package.
+# German translations for generic package.
 # Copyright (C) 2026 John Erling Blad
 # This file is distributed under the same license as the generic package.
 # John Erling Blad <jeblad@gmail.com>, 2026.
@@ -8,13 +8,14 @@ msgstr ""
 "Project-Id-Version: generic\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-04 01:45+0200\n"
-"PO-Revision-Date: 2026-07-03 00:00+0200\n"
+"PO-Revision-Date: 2026-07-04 00:00+0200\n"
 "Last-Translator: John Erling Blad <jeblad@gmail.com>\n"
-"Language-Team: Norwegian Nynorsk\n"
-"Language: nn\n"
+"Language-Team: German\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: /home/john/spaces/generic/src/generic.cpp:38
 #: /home/john/spaces/generic/src/generic.cpp:53
@@ -29,72 +30,71 @@ msgstr ""
 #: /home/john/spaces/generic/src/generic.cpp:187
 #, c++-format
 msgid "Entered {}()"
-msgstr "Gjekk inn i {}()"
+msgstr "{}() betreten"
 
 #: /home/john/spaces/generic/src/about.cpp:84
 #: /home/john/spaces/generic/src/about.cpp:115
 #: /home/john/spaces/generic/src/about.cpp:157
 msgid "Description:"
-msgstr "Skildring:"
+msgstr "Beschreibung:"
 
 #: /home/john/spaces/generic/src/about.cpp:86
 #: /home/john/spaces/generic/src/about.cpp:117
 #: /home/john/spaces/generic/src/about.cpp:159
 msgid "Homepage:"
-msgstr "Heimeside:"
+msgstr "Webseite:"
 
 #: /home/john/spaces/generic/src/about.cpp:88
 #: /home/john/spaces/generic/src/about.cpp:119
 #: /home/john/spaces/generic/src/about.cpp:161
 msgid "Version:"
-msgstr "Versjon:"
+msgstr "Version:"
 
 #: /home/john/spaces/generic/src/about.cpp:90
 #: /home/john/spaces/generic/src/about.cpp:121
 msgid "API level:"
-msgstr "API-nivå:"
+msgstr "API-Ebene:"
 
 #: /home/john/spaces/generic/src/about.cpp:92
 #: /home/john/spaces/generic/src/about.cpp:123
 #: /home/john/spaces/generic/src/about.cpp:167
 msgid "License:"
-msgstr "Lisens:"
+msgstr "Lizenz:"
 
 #: /home/john/spaces/generic/src/about.cpp:94
 #: /home/john/spaces/generic/src/about.cpp:125
 #: /home/john/spaces/generic/src/about.cpp:169
 msgid "Copyright:"
-msgstr "Opphavsrett:"
+msgstr "Urheberrecht:"
 
 #: /home/john/spaces/generic/src/about.cpp:96
 #: /home/john/spaces/generic/src/about.cpp:127
 #: /home/john/spaces/generic/src/about.cpp:171
 msgid "Creator:"
-msgstr "Skapar:"
+msgstr "Ersteller:"
 
 #: /home/john/spaces/generic/src/about.cpp:98
 #: /home/john/spaces/generic/src/about.cpp:129
 #: /home/john/spaces/generic/src/about.cpp:178
 msgid "Contributors:"
-msgstr "Bidragsytarar:"
+msgstr "Mitwirkende:"
 
 #: /home/john/spaces/generic/src/about.cpp:100
 #: /home/john/spaces/generic/src/about.cpp:131
 msgid "translator-credits"
 msgstr ""
 "John Erling Blad <jeblad@gmail.com>\n"
-"Gemini AI\n"
 "Claude AI"
 
 #: /home/john/spaces/generic/src/about.cpp:102
 #: /home/john/spaces/generic/src/about.cpp:133
 msgid "Translators:"
-msgstr "Omsetjarar:"
+msgstr "Übersetzer:"
 
 #: /home/john/spaces/generic/src/about.cpp:149
 #, c++-format
 msgid "Failed to read agent metadata: {}"
-msgstr "Kunne ikkje lese agent-metadata: {}"
+msgstr "Agentenmetadaten konnten nicht gelesen werden: {}"
 
 #: /home/john/spaces/generic/src/about.cpp:163
 msgid "Model:"
@@ -102,97 +102,97 @@ msgstr "Modell:"
 
 #: /home/john/spaces/generic/src/about.cpp:165
 msgid "Epoch:"
-msgstr "Epoke:"
+msgstr "Epoche:"
 
 #: /home/john/spaces/generic/src/about.cpp:188
 msgid "Provenance:"
-msgstr "Proveniens:"
+msgstr "Provenienz:"
 
 #: /home/john/spaces/generic/src/clone.cpp:23
 #, c++-format
 msgid "Failed to open input file: {}"
-msgstr "Kunne ikkje opne innfil: {}"
+msgstr "Eingabedatei konnte nicht geöffnet werden: {}"
 
 #: /home/john/spaces/generic/src/clone.cpp:36
 #: /home/john/spaces/generic/src/install.cpp:41
 #: /home/john/spaces/generic/src/uninstall.cpp:41
 #, c++-format
 msgid "Failed to read agent metadata from {}: {}"
-msgstr "Kunne ikkje lese agent-metadata frå {}: {}"
+msgstr "Agentenmetadaten konnten nicht aus »{}« gelesen werden: {}"
 
 #: /home/john/spaces/generic/src/clone.cpp:59
 #, c++-format
 msgid "Failed to write cloned image to {}: {}"
-msgstr "Kunne ikkje skrive klona bilete til {}: {}"
+msgstr "Geklontes Abbild konnte nicht nach »{}« geschrieben werden: {}"
 
 #: /home/john/spaces/generic/src/down.cpp:34
 #, c++-format
 msgid "No PID file found for agent: {}"
-msgstr "Fann inga PID-fil for agent: {}"
+msgstr "Keine PID-Datei für Agent gefunden: {}"
 
 #: /home/john/spaces/generic/src/down.cpp:48
 #, c++-format
 msgid "Failed to send SIGTERM to PID {}: {}"
-msgstr "Kunne ikkje sende SIGTERM til PID {}: {}"
+msgstr "SIGTERM konnte nicht an PID {} gesendet werden: {}"
 
 #: /home/john/spaces/generic/src/export.cpp:31
 #, c++-format
 msgid "Workspace state directory not found: {}"
-msgstr "Arbeidsmappas tilstandskatalog vart ikkje funnen: {}"
+msgstr "Zustandsverzeichnis des Arbeitsbereichs nicht gefunden: {}"
 
 #: /home/john/spaces/generic/src/export.cpp:49
 #: /home/john/spaces/generic/src/import.cpp:49
 #, c++-format
 msgid "Cannot open source: {}"
-msgstr "Kan ikkje opne kjelde: {}"
+msgstr "Quelle kann nicht geöffnet werden: {}"
 
 #: /home/john/spaces/generic/src/export.cpp:55
 #: /home/john/spaces/generic/src/import.cpp:55
 #, c++-format
 msgid "Cannot create destination: {}"
-msgstr "Kan ikkje opprette mål: {}"
+msgstr "Ziel kann nicht erstellt werden: {}"
 
 #: /home/john/spaces/generic/src/export.cpp:68
 #: /home/john/spaces/generic/src/import.cpp:68
 #, c++-format
 msgid "Write error for: {}"
-msgstr "Skrivefeil for: {}"
+msgstr "Schreibfehler für: {}"
 
 #: /home/john/spaces/generic/src/export.cpp:78
 #, c++-format
 msgid "Exported {} agent file(s) to {}."
-msgstr "Eksporterte {} agentfil(ar) til {}."
+msgstr "{} Agentendatei(en) nach »{}« exportiert."
 
 #: /home/john/spaces/generic/src/import.cpp:31
 #, c++-format
 msgid "Source state directory not found: {}"
-msgstr "Kjeldas tilstandskatalog vart ikkje funnen: {}"
+msgstr "Zustandsverzeichnis der Quelle nicht gefunden: {}"
 
 #: /home/john/spaces/generic/src/import.cpp:78
 #, c++-format
 msgid "Imported {} agent file(s) from {}."
-msgstr "Importerte {} agentfil(ar) frå {}."
+msgstr "{} Agentendatei(en) aus »{}« importiert."
 
 #: /home/john/spaces/generic/src/init.cpp:67
 #, c++-format
 msgid "Failed to copy {} to {}"
-msgstr "Kunne ikkje kopiere {} til {}"
+msgstr "»{}« konnte nicht nach »{}« kopiert werden"
 
 #: /home/john/spaces/generic/src/install.cpp:57
 #, c++-format
 msgid "Target file already exists: {}"
-msgstr "Målfil finst allereie: {}"
+msgstr "Zieldatei existiert bereits: {}"
 
 #: /home/john/spaces/generic/src/install.cpp:79
 #, c++-format
 msgid "Failed to remove source: {}"
-msgstr "Kunne ikkje fjerne kjeldefil: {}"
+msgstr "Quelldatei konnte nicht entfernt werden: {}"
 
 #: /home/john/spaces/generic/src/install.cpp:85
 #: /home/john/spaces/generic/src/list.cpp:41
 #: /home/john/spaces/generic/src/uninstall.cpp:96
 msgid "no nickname"
-msgstr "inkje kallenamn"
+msgstr "kein Spitzname"
 
 #: /home/john/spaces/generic/src/list.cpp:34
 msgid "ID"
@@ -200,7 +200,7 @@ msgstr "ID"
 
 #: /home/john/spaces/generic/src/list.cpp:35
 msgid "Nickname"
-msgstr "Kallenamn"
+msgstr "Spitzname"
 
 #: /home/john/spaces/generic/src/list.cpp:36
 msgid "PID"
@@ -208,72 +208,72 @@ msgstr "PID"
 
 #: /home/john/spaces/generic/src/prune.cpp:32
 msgid "missing"
-msgstr "manglar"
+msgstr "fehlt"
 
 #: /home/john/spaces/generic/src/prune.cpp:32
 msgid "found"
-msgstr "funnen"
+msgstr "gefunden"
 
 #: /home/john/spaces/generic/src/prune.cpp:38
 msgid "would remove: "
-msgstr "vil fjerne: "
+msgstr "würde entfernen: "
 
 #: /home/john/spaces/generic/src/prune.cpp:43
 #, c++-format
 msgid "Failed to remove {}: {}"
-msgstr "Kunne ikkje fjerne {}: {}"
+msgstr "»{}« konnte nicht entfernt werden: {}"
 
 #: /home/john/spaces/generic/src/prune.cpp:44
 msgid "removed: "
-msgstr "fjerna: "
+msgstr "entfernt: "
 
 #: /home/john/spaces/generic/src/prune.cpp:115
 #, c++-format
 msgid "Agent {} is still running. Stop it before cleaning up."
-msgstr "Agent {} køyrer framleis. Stopp han før opprydding."
+msgstr "Agent {} läuft noch. Bitte stoppen Sie ihn vor dem Aufräumen."
 
 #: /home/john/spaces/generic/src/prune.cpp:124
 msgid "BEVE file: "
-msgstr "BEVE-fil: "
+msgstr "BEVE-Datei: "
 
 #: /home/john/spaces/generic/src/prune.cpp:125
 msgid "MMIO file: "
-msgstr "MMIO-fil: "
+msgstr "MMIO-Datei: "
 
 #: /home/john/spaces/generic/src/prune.cpp:126
 msgid "PID file:  "
-msgstr "PID-fil:  "
+msgstr "PID-Datei:  "
 
 #: /home/john/spaces/generic/src/prune.cpp:130
 #, c++-format
 msgid "hint: MMIO state is available — run 'hera rebuild {}' to recover."
-msgstr "tips: MMIO-tilstand er tilgjengeleg — køyr 'hera rebuild {}' for å gjenopprette."
+msgstr "Hinweis: MMIO-Zustand ist verfügbar — führen Sie »hera rebuild {}« aus, um wiederherzustellen."
 
 #: /home/john/spaces/generic/src/prune.cpp:132
 msgid "(use --force to remove)\n"
-msgstr "(bruk --force for å fjerne)\n"
+msgstr "(--force zum Entfernen verwenden)\n"
 
 #: /home/john/spaces/generic/src/uninstall.cpp:51
 #, c++-format
 msgid "Uninstallation aborted: Agent {} is running."
-msgstr "Avinstallasjon avbroten: Agent {} køyrer."
+msgstr "Deinstallation abgebrochen: Agent {} läuft."
 
 #: /home/john/spaces/generic/src/uninstall.cpp:59
 #, c++-format
 msgid "Target file exists: {}"
-msgstr "Målfil finst: {}"
+msgstr "Zieldatei existiert: {}"
 
 #: /home/john/spaces/generic/src/uninstall.cpp:78
 #, c++-format
 msgid "Failed to open output file {}: {}"
-msgstr "Kunne ikkje opne utfil {}: {}"
+msgstr "Ausgabedatei »{}« konnte nicht geöffnet werden: {}"
 
 #: /home/john/spaces/generic/src/uninstall.cpp:83
 #, c++-format
 msgid "Failed to write agent image to {}: {}"
-msgstr "Kunne ikkje skrive agentbilete til {}: {}"
+msgstr "Agentenabbild konnte nicht nach »{}« geschrieben werden: {}"
 
 #: /home/john/spaces/generic/src/uninstall.cpp:90
 #, c++-format
 msgid "Failed to remove source file after uninstall: {}."
-msgstr "Kunne ikkje fjerne kjeldefil etter avinstallasjon: {}."
+msgstr "Quelldatei konnte nach der Deinstallation nicht entfernt werden: »{}«."

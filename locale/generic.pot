@@ -8,25 +8,239 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-14 22:36+0200\n"
+"POT-Creation-Date: 2026-07-04 01:53+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: /home/john/spaces/generic/src/generic.cpp:49
-#: /home/john/spaces/generic/src/generic.cpp:64
-#: /home/john/spaces/generic/src/generic.cpp:80
-#: /home/john/spaces/generic/src/generic.cpp:95
-#: /home/john/spaces/generic/src/generic.cpp:109
-#: /home/john/spaces/generic/src/generic.cpp:124
-#: /home/john/spaces/generic/src/generic.cpp:139
-#: /home/john/spaces/generic/src/generic.cpp:154
-#: /home/john/spaces/generic/src/generic.cpp:169
-#: /home/john/spaces/generic/src/generic.cpp:184
+#: src/generic.cpp:38 src/generic.cpp:53 src/generic.cpp:69 src/generic.cpp:84
+#: src/generic.cpp:98 src/generic.cpp:112 src/generic.cpp:127
+#: src/generic.cpp:142 src/generic.cpp:157 src/generic.cpp:172
+#: src/generic.cpp:187
 #, c++-format
 msgid "Entered {}()"
+msgstr ""
+
+#: src/about.cpp:84 src/about.cpp:115 src/about.cpp:157
+msgid "Description:"
+msgstr ""
+
+#: src/about.cpp:86 src/about.cpp:117 src/about.cpp:159
+msgid "Homepage:"
+msgstr ""
+
+#: src/about.cpp:88 src/about.cpp:119 src/about.cpp:161
+msgid "Version:"
+msgstr ""
+
+#: src/about.cpp:90 src/about.cpp:121
+msgid "API level:"
+msgstr ""
+
+#: src/about.cpp:92 src/about.cpp:123 src/about.cpp:167
+msgid "License:"
+msgstr ""
+
+#: src/about.cpp:94 src/about.cpp:125 src/about.cpp:169
+msgid "Copyright:"
+msgstr ""
+
+#: src/about.cpp:96 src/about.cpp:127 src/about.cpp:171
+msgid "Creator:"
+msgstr ""
+
+#: src/about.cpp:98 src/about.cpp:129 src/about.cpp:178
+msgid "Contributors:"
+msgstr ""
+
+#: src/about.cpp:100 src/about.cpp:131
+msgid "translator-credits"
+msgstr ""
+
+#: src/about.cpp:102 src/about.cpp:133
+msgid "Translators:"
+msgstr ""
+
+#: src/about.cpp:149
+#, c++-format
+msgid "Failed to read agent metadata: {}"
+msgstr ""
+
+#: src/about.cpp:163
+msgid "Model:"
+msgstr ""
+
+#: src/about.cpp:165
+msgid "Epoch:"
+msgstr ""
+
+#: src/about.cpp:188
+msgid "Provenance:"
+msgstr ""
+
+#: src/clone.cpp:23
+#, c++-format
+msgid "Failed to open input file: {}"
+msgstr ""
+
+#: src/clone.cpp:36 src/install.cpp:41 src/uninstall.cpp:41
+#, c++-format
+msgid "Failed to read agent metadata from {}: {}"
+msgstr ""
+
+#: src/clone.cpp:59
+#, c++-format
+msgid "Failed to write cloned image to {}: {}"
+msgstr ""
+
+#: src/down.cpp:34
+#, c++-format
+msgid "No PID file found for agent: {}"
+msgstr ""
+
+#: src/down.cpp:48
+#, c++-format
+msgid "Failed to send SIGTERM to PID {}: {}"
+msgstr ""
+
+#: src/export.cpp:31
+#, c++-format
+msgid "Workspace state directory not found: {}"
+msgstr ""
+
+#: src/export.cpp:49 src/import.cpp:49
+#, c++-format
+msgid "Cannot open source: {}"
+msgstr ""
+
+#: src/export.cpp:55 src/import.cpp:55
+#, c++-format
+msgid "Cannot create destination: {}"
+msgstr ""
+
+#: src/export.cpp:68 src/import.cpp:68
+#, c++-format
+msgid "Write error for: {}"
+msgstr ""
+
+#: src/export.cpp:78
+#, c++-format
+msgid "Exported {} agent file(s) to {}."
+msgstr ""
+
+#: src/import.cpp:31
+#, c++-format
+msgid "Source state directory not found: {}"
+msgstr ""
+
+#: src/import.cpp:78
+#, c++-format
+msgid "Imported {} agent file(s) from {}."
+msgstr ""
+
+#: src/init.cpp:67
+#, c++-format
+msgid "Failed to copy {} to {}"
+msgstr ""
+
+#: src/install.cpp:57
+#, c++-format
+msgid "Target file already exists: {}"
+msgstr ""
+
+#: src/install.cpp:79
+#, c++-format
+msgid "Failed to remove source: {}"
+msgstr ""
+
+#: src/install.cpp:85 src/list.cpp:41 src/uninstall.cpp:96
+msgid "no nickname"
+msgstr ""
+
+#: src/list.cpp:34
+msgid "ID"
+msgstr ""
+
+#: src/list.cpp:35
+msgid "Nickname"
+msgstr ""
+
+#: src/list.cpp:36
+msgid "PID"
+msgstr ""
+
+#: src/prune.cpp:32
+msgid "missing"
+msgstr ""
+
+#: src/prune.cpp:32
+msgid "found"
+msgstr ""
+
+#: src/prune.cpp:38
+msgid "would remove: "
+msgstr ""
+
+#: src/prune.cpp:43
+#, c++-format
+msgid "Failed to remove {}: {}"
+msgstr ""
+
+#: src/prune.cpp:44
+msgid "removed: "
+msgstr ""
+
+#: src/prune.cpp:115
+#, c++-format
+msgid "Agent {} is still running. Stop it before cleaning up."
+msgstr ""
+
+#: src/prune.cpp:124
+msgid "BEVE file: "
+msgstr ""
+
+#: src/prune.cpp:125
+msgid "MMIO file: "
+msgstr ""
+
+#: src/prune.cpp:126
+msgid "PID file:  "
+msgstr ""
+
+#: src/prune.cpp:130
+#, c++-format
+msgid "hint: MMIO state is available — run 'hera rebuild {}' to recover."
+msgstr ""
+
+#: src/prune.cpp:132
+msgid "(use --force to remove)\n"
+msgstr ""
+
+#: src/uninstall.cpp:51
+#, c++-format
+msgid "Uninstallation aborted: Agent {} is running."
+msgstr ""
+
+#: src/uninstall.cpp:59
+#, c++-format
+msgid "Target file exists: {}"
+msgstr ""
+
+#: src/uninstall.cpp:78
+#, c++-format
+msgid "Failed to open output file {}: {}"
+msgstr ""
+
+#: src/uninstall.cpp:83
+#, c++-format
+msgid "Failed to write agent image to {}: {}"
+msgstr ""
+
+#: src/uninstall.cpp:90
+#, c++-format
+msgid "Failed to remove source file after uninstall: {}."
 msgstr ""

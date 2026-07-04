@@ -146,9 +146,22 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/cmake/Gettext_helpers.cmake")
         ALL
         DOMAIN ${PROJECT_NAME}
         TARGET_NAME ${PROJECT_NAME}-translations
-        SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/src/generic.cpp"
+        SOURCES
+            "${CMAKE_CURRENT_SOURCE_DIR}/src/generic.cpp"
+            "${CMAKE_CURRENT_SOURCE_DIR}/src/about.cpp"
+            "${CMAKE_CURRENT_SOURCE_DIR}/src/build.cpp"
+            "${CMAKE_CURRENT_SOURCE_DIR}/src/clone.cpp"
+            "${CMAKE_CURRENT_SOURCE_DIR}/src/down.cpp"
+            "${CMAKE_CURRENT_SOURCE_DIR}/src/export.cpp"
+            "${CMAKE_CURRENT_SOURCE_DIR}/src/import.cpp"
+            "${CMAKE_CURRENT_SOURCE_DIR}/src/init.cpp"
+            "${CMAKE_CURRENT_SOURCE_DIR}/src/install.cpp"
+            "${CMAKE_CURRENT_SOURCE_DIR}/src/list.cpp"
+            "${CMAKE_CURRENT_SOURCE_DIR}/src/prune.cpp"
+            "${CMAKE_CURRENT_SOURCE_DIR}/src/signal.cpp"
+            "${CMAKE_CURRENT_SOURCE_DIR}/src/uninstall.cpp"
         POTFILE_DESTINATION "locale"
-        LANGUAGES "nn;nb"
+        LANGUAGES "nn;nb;da;sv;de;fr;nl"
         XGETTEXT_ARGS 
             --language=C++
             --from-code=UTF-8
