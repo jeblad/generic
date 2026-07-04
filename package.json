@@ -1,6 +1,6 @@
 {
   "name": "generic",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "An extension for the Heuristic Reasoning Agent (hera) framework providing model-specific functionality.",
   "author": "John Erling Blad",
   "license": "SEE LICENSE IN LICENSE.txt",

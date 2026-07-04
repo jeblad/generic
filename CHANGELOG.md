@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [0.1.1](https://github.com/jeblad/generic/compare/v0.1.0...v0.1.1) (2026-07-04)
+
+
+### Features
+
+* **locale:** improve hint messages and add translation guidelines ([b93d164](https://github.com/jeblad/generic/commit/b93d164b98f36a8d9635c5960c26d085d6ee928d))
+
 ## [0.1.0](https://github.com/jeblad/generic/compare/v0.0.4...v0.1.0) (2026-07-04)
 
 ## [0.0.4](https://github.com/jeblad/generic/compare/v0.0.3...v0.0.4) (2026-07-04)
