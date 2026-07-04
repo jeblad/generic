@@ -146,7 +146,8 @@ Result about_module(const char* filename, int flags) {
     hera::AgentHeader header;
     std::string scratch;
     if (auto ec = read_file(header, filename, scratch)) {
-        ERROR_FMT_("Failed to read agent metadata: {}", glz::format_error(ec, scratch));
+        ERROR_FMT_("Failed to read agent metadata: {}", glz::format_error(ec, scratch))
+            .hint(_("MMIO state is available — run `hera rebuild` to recover."));
         return Result(1);
     }
 

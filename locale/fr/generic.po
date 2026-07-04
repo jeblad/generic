@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: generic\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-04 01:45+0200\n"
+"POT-Creation-Date: 2026-07-04 16:56+0200\n"
 "PO-Revision-Date: 2026-07-04 00:00+0200\n"
 "Last-Translator: John Erling Blad <jeblad@gmail.com>\n"
 "Language-Team: French\n"
@@ -34,19 +34,19 @@ msgstr "Entré dans {}()"
 
 #: /home/john/spaces/generic/src/about.cpp:84
 #: /home/john/spaces/generic/src/about.cpp:115
-#: /home/john/spaces/generic/src/about.cpp:157
+#: /home/john/spaces/generic/src/about.cpp:158
 msgid "Description:"
 msgstr "Description :"
 
 #: /home/john/spaces/generic/src/about.cpp:86
 #: /home/john/spaces/generic/src/about.cpp:117
-#: /home/john/spaces/generic/src/about.cpp:159
+#: /home/john/spaces/generic/src/about.cpp:160
 msgid "Homepage:"
 msgstr "Site web :"
 
 #: /home/john/spaces/generic/src/about.cpp:88
 #: /home/john/spaces/generic/src/about.cpp:119
-#: /home/john/spaces/generic/src/about.cpp:161
+#: /home/john/spaces/generic/src/about.cpp:162
 msgid "Version:"
 msgstr "Version :"
 
@@ -57,25 +57,25 @@ msgstr "Niveau d'API :"
 
 #: /home/john/spaces/generic/src/about.cpp:92
 #: /home/john/spaces/generic/src/about.cpp:123
-#: /home/john/spaces/generic/src/about.cpp:167
+#: /home/john/spaces/generic/src/about.cpp:168
 msgid "License:"
 msgstr "Licence :"
 
 #: /home/john/spaces/generic/src/about.cpp:94
 #: /home/john/spaces/generic/src/about.cpp:125
-#: /home/john/spaces/generic/src/about.cpp:169
+#: /home/john/spaces/generic/src/about.cpp:170
 msgid "Copyright:"
 msgstr "Droits d'auteur :"
 
 #: /home/john/spaces/generic/src/about.cpp:96
 #: /home/john/spaces/generic/src/about.cpp:127
-#: /home/john/spaces/generic/src/about.cpp:171
+#: /home/john/spaces/generic/src/about.cpp:172
 msgid "Creator:"
 msgstr "Créateur :"
 
 #: /home/john/spaces/generic/src/about.cpp:98
 #: /home/john/spaces/generic/src/about.cpp:129
-#: /home/john/spaces/generic/src/about.cpp:178
+#: /home/john/spaces/generic/src/about.cpp:179
 msgid "Contributors:"
 msgstr "Contributeurs :"
 
@@ -96,15 +96,19 @@ msgstr "Traducteurs :"
 msgid "Failed to read agent metadata: {}"
 msgstr "Impossible de lire les métadonnées de l'agent : {}"
 
-#: /home/john/spaces/generic/src/about.cpp:163
+#: /home/john/spaces/generic/src/about.cpp:150
+msgid "MMIO state is available — run `hera rebuild` to recover."
+msgstr "L'état MMIO est disponible — exécutez `hera rebuild` pour récupérer."
+
+#: /home/john/spaces/generic/src/about.cpp:164
 msgid "Model:"
 msgstr "Modèle :"
 
-#: /home/john/spaces/generic/src/about.cpp:165
+#: /home/john/spaces/generic/src/about.cpp:166
 msgid "Epoch:"
 msgstr "Époque :"
 
-#: /home/john/spaces/generic/src/about.cpp:188
+#: /home/john/spaces/generic/src/about.cpp:189
 msgid "Provenance:"
 msgstr "Provenance :"
 
@@ -113,14 +117,26 @@ msgstr "Provenance :"
 msgid "Failed to open input file: {}"
 msgstr "Impossible d'ouvrir le fichier d'entrée : {}"
 
-#: /home/john/spaces/generic/src/clone.cpp:36
+#: /home/john/spaces/generic/src/clone.cpp:24
+#: /home/john/spaces/generic/src/clone.cpp:61
+#: /home/john/spaces/generic/src/init.cpp:68
+#: /home/john/spaces/generic/src/uninstall.cpp:80
+#: /home/john/spaces/generic/src/uninstall.cpp:86
+msgid ""
+"If access is denied, the path may be outside the Landlock sandbox — use a "
+"path within the current mode's directories."
+msgstr ""
+"Si l'accès est refusé — le chemin peut être hors du bac à sable Landlock. "
+"Utilisez un chemin dans les répertoires du mode actuel."
+
+#: /home/john/spaces/generic/src/clone.cpp:37
 #: /home/john/spaces/generic/src/install.cpp:41
 #: /home/john/spaces/generic/src/uninstall.cpp:41
 #, c++-format
 msgid "Failed to read agent metadata from {}: {}"
 msgstr "Impossible de lire les métadonnées de l'agent depuis « {} » : {}"
 
-#: /home/john/spaces/generic/src/clone.cpp:59
+#: /home/john/spaces/generic/src/clone.cpp:60
 #, c++-format
 msgid "Failed to write cloned image to {}: {}"
 msgstr "Impossible d'écrire l'image clonée vers « {} » : {}"
@@ -160,8 +176,10 @@ msgstr "Erreur d'écriture pour : {}"
 
 #: /home/john/spaces/generic/src/export.cpp:78
 #, c++-format
-msgid "Exported {} agent file(s) to {}."
-msgstr "{} fichier(s) d'agent exporté(s) vers « {} »."
+msgid "Exported one agent file to {1}."
+msgid_plural "Exported {0} agent files to {1}."
+msgstr[0] "Un fichier agent exporté vers {1}."
+msgstr[1] "{0} fichiers agent exportés vers {1}."
 
 #: /home/john/spaces/generic/src/import.cpp:31
 #, c++-format
@@ -170,8 +188,10 @@ msgstr "Répertoire d'état de la source introuvable : {}"
 
 #: /home/john/spaces/generic/src/import.cpp:78
 #, c++-format
-msgid "Imported {} agent file(s) from {}."
-msgstr "{} fichier(s) d'agent importé(s) depuis « {} »."
+msgid "Imported one agent file from {1}."
+msgid_plural "Imported {0} agent files from {1}."
+msgstr[0] "Un fichier agent importé depuis {1}."
+msgstr[1] "{0} fichiers agent importés depuis {1}."
 
 #: /home/john/spaces/generic/src/init.cpp:67
 #, c++-format
@@ -183,14 +203,20 @@ msgstr "Impossible de copier « {} » vers « {} »"
 msgid "Target file already exists: {}"
 msgstr "Le fichier cible existe déjà : {}"
 
-#: /home/john/spaces/generic/src/install.cpp:79
+#: /home/john/spaces/generic/src/install.cpp:58
+msgid "Use --force to overwrite — existing agent data will be lost."
+msgstr ""
+"Utilisez --force pour écraser — les données d'agent existantes seront "
+"perdues."
+
+#: /home/john/spaces/generic/src/install.cpp:80
 #, c++-format
 msgid "Failed to remove source: {}"
 msgstr "Impossible de supprimer le fichier source : {}"
 
-#: /home/john/spaces/generic/src/install.cpp:85
+#: /home/john/spaces/generic/src/install.cpp:86
 #: /home/john/spaces/generic/src/list.cpp:41
-#: /home/john/spaces/generic/src/uninstall.cpp:96
+#: /home/john/spaces/generic/src/uninstall.cpp:99
 msgid "no nickname"
 msgstr "aucun surnom"
 
@@ -218,11 +244,6 @@ msgstr "trouvé"
 msgid "would remove: "
 msgstr "supprimerait : "
 
-#: /home/john/spaces/generic/src/prune.cpp:43
-#, c++-format
-msgid "Failed to remove {}: {}"
-msgstr "Impossible de supprimer « {} » : {}"
-
 #: /home/john/spaces/generic/src/prune.cpp:44
 msgid "removed: "
 msgstr "supprimé : "
@@ -230,7 +251,8 @@ msgstr "supprimé : "
 #: /home/john/spaces/generic/src/prune.cpp:115
 #, c++-format
 msgid "Agent {} is still running. Stop it before cleaning up."
-msgstr "L'agent {} est toujours en cours d'exécution. Arrêtez-le avant de nettoyer."
+msgstr ""
+"L'agent {} est toujours en cours d'exécution. Arrêtez-le avant de nettoyer."
 
 #: /home/john/spaces/generic/src/prune.cpp:124
 msgid "BEVE file: "
@@ -244,14 +266,17 @@ msgstr "Fichier MMIO : "
 msgid "PID file:  "
 msgstr "Fichier PID : "
 
-#: /home/john/spaces/generic/src/prune.cpp:130
+#: /home/john/spaces/generic/src/prune.cpp:129
 #, c++-format
-msgid "hint: MMIO state is available — run 'hera rebuild {}' to recover."
-msgstr "conseil : l'état MMIO est disponible — exécutez « hera rebuild {} » pour récupérer."
+msgid "MMIO state is available — run `hera rebuild {}` to recover."
+msgstr ""
+"L'état MMIO est disponible — exécutez `hera rebuild {}` pour récupérer."
 
-#: /home/john/spaces/generic/src/prune.cpp:132
-msgid "(use --force to remove)\n"
-msgstr "(utilisez --force pour supprimer)\n"
+#: /home/john/spaces/generic/src/prune.cpp:131
+msgid "Use --force to remove — agent state will be permanently deleted."
+msgstr ""
+"Utilisez --force pour supprimer — l'état de l'agent sera définitivement "
+"effacé."
 
 #: /home/john/spaces/generic/src/uninstall.cpp:51
 #, c++-format
@@ -263,17 +288,26 @@ msgstr "Désinstallation annulée : l'agent {} est en cours d'exécution."
 msgid "Target file exists: {}"
 msgstr "Le fichier cible existe : {}"
 
-#: /home/john/spaces/generic/src/uninstall.cpp:78
+#: /home/john/spaces/generic/src/uninstall.cpp:60
+msgid "Use --force to overwrite — existing backup will be lost."
+msgstr "Utilisez --force pour écraser — la sauvegarde existante sera perdue."
+
+#: /home/john/spaces/generic/src/uninstall.cpp:79
 #, c++-format
 msgid "Failed to open output file {}: {}"
 msgstr "Impossible d'ouvrir le fichier de sortie « {} » : {}"
 
-#: /home/john/spaces/generic/src/uninstall.cpp:83
+#: /home/john/spaces/generic/src/uninstall.cpp:85
 #, c++-format
 msgid "Failed to write agent image to {}: {}"
 msgstr "Impossible d'écrire l'image de l'agent vers « {} » : {}"
 
-#: /home/john/spaces/generic/src/uninstall.cpp:90
+#: /home/john/spaces/generic/src/uninstall.cpp:93
 #, c++-format
 msgid "Failed to remove source file after uninstall: {}."
-msgstr "Impossible de supprimer le fichier source après la désinstallation : « {} »."
+msgstr ""
+"Impossible de supprimer le fichier source après la désinstallation : « {} »."
+
+#, c++-format
+#~ msgid "Failed to remove {}: {}"
+#~ msgstr "Impossible de supprimer « {} » : {}"

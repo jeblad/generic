@@ -54,7 +54,8 @@ Result install(
 
     fs::path out_path = fs::path(out_dir) / (uuid_val + ".beve");
     if (!(flags & HERA_FORCE) && fs::exists(out_path)) {
-        ERROR_FMT_("Target file already exists: {}", out_path.string());
+        ERROR_FMT_("Target file already exists: {}", out_path.string())
+            .hint(_("Use --force to overwrite — existing agent data will be lost."));
         return Result(1);
     }
 

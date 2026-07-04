@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: generic\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-04 01:45+0200\n"
+"POT-Creation-Date: 2026-07-04 16:56+0200\n"
 "PO-Revision-Date: 2026-07-04 00:00+0200\n"
 "Last-Translator: John Erling Blad <jeblad@gmail.com>\n"
 "Language-Team: Dutch\n"
@@ -34,19 +34,19 @@ msgstr "{}() binnengegaan"
 
 #: /home/john/spaces/generic/src/about.cpp:84
 #: /home/john/spaces/generic/src/about.cpp:115
-#: /home/john/spaces/generic/src/about.cpp:157
+#: /home/john/spaces/generic/src/about.cpp:158
 msgid "Description:"
 msgstr "Beschrijving:"
 
 #: /home/john/spaces/generic/src/about.cpp:86
 #: /home/john/spaces/generic/src/about.cpp:117
-#: /home/john/spaces/generic/src/about.cpp:159
+#: /home/john/spaces/generic/src/about.cpp:160
 msgid "Homepage:"
 msgstr "Website:"
 
 #: /home/john/spaces/generic/src/about.cpp:88
 #: /home/john/spaces/generic/src/about.cpp:119
-#: /home/john/spaces/generic/src/about.cpp:161
+#: /home/john/spaces/generic/src/about.cpp:162
 msgid "Version:"
 msgstr "Versie:"
 
@@ -57,25 +57,25 @@ msgstr "API-niveau:"
 
 #: /home/john/spaces/generic/src/about.cpp:92
 #: /home/john/spaces/generic/src/about.cpp:123
-#: /home/john/spaces/generic/src/about.cpp:167
+#: /home/john/spaces/generic/src/about.cpp:168
 msgid "License:"
 msgstr "Licentie:"
 
 #: /home/john/spaces/generic/src/about.cpp:94
 #: /home/john/spaces/generic/src/about.cpp:125
-#: /home/john/spaces/generic/src/about.cpp:169
+#: /home/john/spaces/generic/src/about.cpp:170
 msgid "Copyright:"
 msgstr "Auteursrecht:"
 
 #: /home/john/spaces/generic/src/about.cpp:96
 #: /home/john/spaces/generic/src/about.cpp:127
-#: /home/john/spaces/generic/src/about.cpp:171
+#: /home/john/spaces/generic/src/about.cpp:172
 msgid "Creator:"
 msgstr "Maker:"
 
 #: /home/john/spaces/generic/src/about.cpp:98
 #: /home/john/spaces/generic/src/about.cpp:129
-#: /home/john/spaces/generic/src/about.cpp:178
+#: /home/john/spaces/generic/src/about.cpp:179
 msgid "Contributors:"
 msgstr "Bijdragers:"
 
@@ -96,15 +96,19 @@ msgstr "Vertalers:"
 msgid "Failed to read agent metadata: {}"
 msgstr "Agentmetadata kon niet worden gelezen: {}"
 
-#: /home/john/spaces/generic/src/about.cpp:163
+#: /home/john/spaces/generic/src/about.cpp:150
+msgid "MMIO state is available — run `hera rebuild` to recover."
+msgstr "MMIO-status is beschikbaar – voer `hera rebuild` uit om te herstellen."
+
+#: /home/john/spaces/generic/src/about.cpp:164
 msgid "Model:"
 msgstr "Model:"
 
-#: /home/john/spaces/generic/src/about.cpp:165
+#: /home/john/spaces/generic/src/about.cpp:166
 msgid "Epoch:"
 msgstr "Epoche:"
 
-#: /home/john/spaces/generic/src/about.cpp:188
+#: /home/john/spaces/generic/src/about.cpp:189
 msgid "Provenance:"
 msgstr "Herkomst:"
 
@@ -113,14 +117,26 @@ msgstr "Herkomst:"
 msgid "Failed to open input file: {}"
 msgstr "Invoerbestand kon niet worden geopend: {}"
 
-#: /home/john/spaces/generic/src/clone.cpp:36
+#: /home/john/spaces/generic/src/clone.cpp:24
+#: /home/john/spaces/generic/src/clone.cpp:61
+#: /home/john/spaces/generic/src/init.cpp:68
+#: /home/john/spaces/generic/src/uninstall.cpp:80
+#: /home/john/spaces/generic/src/uninstall.cpp:86
+msgid ""
+"If access is denied, the path may be outside the Landlock sandbox — use a "
+"path within the current mode's directories."
+msgstr ""
+"Als toegang geweigerd wordt – het pad kan buiten de Landlock-sandbox liggen. "
+"Gebruik een pad binnen de mappen van de huidige modus."
+
+#: /home/john/spaces/generic/src/clone.cpp:37
 #: /home/john/spaces/generic/src/install.cpp:41
 #: /home/john/spaces/generic/src/uninstall.cpp:41
 #, c++-format
 msgid "Failed to read agent metadata from {}: {}"
 msgstr "Agentmetadata kon niet worden gelezen uit '{}': {}"
 
-#: /home/john/spaces/generic/src/clone.cpp:59
+#: /home/john/spaces/generic/src/clone.cpp:60
 #, c++-format
 msgid "Failed to write cloned image to {}: {}"
 msgstr "Gekloonde kopie kon niet worden geschreven naar '{}': {}"
@@ -160,8 +176,10 @@ msgstr "Schrijffout voor: {}"
 
 #: /home/john/spaces/generic/src/export.cpp:78
 #, c++-format
-msgid "Exported {} agent file(s) to {}."
-msgstr "{} agentbestand(en) geëxporteerd naar '{}'."
+msgid "Exported one agent file to {1}."
+msgid_plural "Exported {0} agent files to {1}."
+msgstr[0] "Één agentbestand geëxporteerd naar {1}."
+msgstr[1] "{0} agentbestanden geëxporteerd naar {1}."
 
 #: /home/john/spaces/generic/src/import.cpp:31
 #, c++-format
@@ -170,8 +188,10 @@ msgstr "Statusmap van bron niet gevonden: {}"
 
 #: /home/john/spaces/generic/src/import.cpp:78
 #, c++-format
-msgid "Imported {} agent file(s) from {}."
-msgstr "{} agentbestand(en) geïmporteerd uit '{}'."
+msgid "Imported one agent file from {1}."
+msgid_plural "Imported {0} agent files from {1}."
+msgstr[0] "Één agentbestand geïmporteerd van {1}."
+msgstr[1] "{0} agentbestanden geïmporteerd van {1}."
 
 #: /home/john/spaces/generic/src/init.cpp:67
 #, c++-format
@@ -183,14 +203,19 @@ msgstr "'{}' kon niet worden gekopieerd naar '{}'"
 msgid "Target file already exists: {}"
 msgstr "Doelbestand bestaat al: {}"
 
-#: /home/john/spaces/generic/src/install.cpp:79
+#: /home/john/spaces/generic/src/install.cpp:58
+msgid "Use --force to overwrite — existing agent data will be lost."
+msgstr ""
+"Gebruik --force om te overschrijven — bestaande agentgegevens gaan verloren."
+
+#: /home/john/spaces/generic/src/install.cpp:80
 #, c++-format
 msgid "Failed to remove source: {}"
 msgstr "Bronbestand kon niet worden verwijderd: {}"
 
-#: /home/john/spaces/generic/src/install.cpp:85
+#: /home/john/spaces/generic/src/install.cpp:86
 #: /home/john/spaces/generic/src/list.cpp:41
-#: /home/john/spaces/generic/src/uninstall.cpp:96
+#: /home/john/spaces/generic/src/uninstall.cpp:99
 msgid "no nickname"
 msgstr "geen bijnaam"
 
@@ -218,11 +243,6 @@ msgstr "gevonden"
 msgid "would remove: "
 msgstr "zou verwijderen: "
 
-#: /home/john/spaces/generic/src/prune.cpp:43
-#, c++-format
-msgid "Failed to remove {}: {}"
-msgstr "'{}' kon niet worden verwijderd: {}"
-
 #: /home/john/spaces/generic/src/prune.cpp:44
 msgid "removed: "
 msgstr "verwijderd: "
@@ -244,14 +264,17 @@ msgstr "MMIO-bestand: "
 msgid "PID file:  "
 msgstr "PID-bestand: "
 
-#: /home/john/spaces/generic/src/prune.cpp:130
+#: /home/john/spaces/generic/src/prune.cpp:129
 #, c++-format
-msgid "hint: MMIO state is available — run 'hera rebuild {}' to recover."
-msgstr "tip: MMIO-status is beschikbaar — voer 'hera rebuild {}' uit om te herstellen."
+msgid "MMIO state is available — run `hera rebuild {}` to recover."
+msgstr ""
+"MMIO-status is beschikbaar – voer `hera rebuild {}` uit om te herstellen."
 
-#: /home/john/spaces/generic/src/prune.cpp:132
-msgid "(use --force to remove)\n"
-msgstr "(gebruik --force om te verwijderen)\n"
+#: /home/john/spaces/generic/src/prune.cpp:131
+msgid "Use --force to remove — agent state will be permanently deleted."
+msgstr ""
+"Gebruik --force om te verwijderen – de agentstatus wordt permanent "
+"verwijderd."
 
 #: /home/john/spaces/generic/src/uninstall.cpp:51
 #, c++-format
@@ -263,17 +286,25 @@ msgstr "Verwijdering afgebroken: agent {} is actief."
 msgid "Target file exists: {}"
 msgstr "Doelbestand bestaat: {}"
 
-#: /home/john/spaces/generic/src/uninstall.cpp:78
+#: /home/john/spaces/generic/src/uninstall.cpp:60
+msgid "Use --force to overwrite — existing backup will be lost."
+msgstr "Gebruik --force om te overschrijven – bestaande back-up gaat verloren."
+
+#: /home/john/spaces/generic/src/uninstall.cpp:79
 #, c++-format
 msgid "Failed to open output file {}: {}"
 msgstr "Uitvoerbestand '{}' kon niet worden geopend: {}"
 
-#: /home/john/spaces/generic/src/uninstall.cpp:83
+#: /home/john/spaces/generic/src/uninstall.cpp:85
 #, c++-format
 msgid "Failed to write agent image to {}: {}"
 msgstr "Agentkopie kon niet worden geschreven naar '{}': {}"
 
-#: /home/john/spaces/generic/src/uninstall.cpp:90
+#: /home/john/spaces/generic/src/uninstall.cpp:93
 #, c++-format
 msgid "Failed to remove source file after uninstall: {}."
 msgstr "Bronbestand kon niet worden verwijderd na verwijdering: '{}'."
+
+#, c++-format
+#~ msgid "Failed to remove {}: {}"
+#~ msgstr "'{}' kon niet worden verwijderd: {}"

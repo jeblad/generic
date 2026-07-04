@@ -64,7 +64,8 @@ Result agent_init(
         if (fs::is_symlink(dst) || fs::exists(dst))
             fs::remove(dst);
         if (!copy_raw(src, dst)) {
-            ERROR_FMT_("Failed to copy {} to {}", src.string(), dst.string());
+            ERROR_FMT_("Failed to copy {} to {}", src.string(), dst.string())
+                .hint(_("If access is denied, the path may be outside the Landlock sandbox — use a path within the current mode's directories."));
             return Result(1);
         }
         NOTICE_FMT_("Installed: lib/{}", name);

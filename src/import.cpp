@@ -75,7 +75,7 @@ Result agent_import(
     if (copied == 0)
         NOTICE_("No BEVE files found to import.");
     else
-        INFO_FMT_("Imported {} agent file(s) from {}.", copied, from_state.string());
+        INFO_NFMT_("Imported one agent file from {1}.", "Imported {0} agent files from {1}.", copied, copied, from_state.string());
 
     return Result(0);
 }

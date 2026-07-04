@@ -20,7 +20,8 @@ Result clone(const char * in_fn, const char * out_fn, const char * uuid_str, con
     
     std::ifstream ifs(in_fn, std::ios::binary | std::ios::ate);
     if (!ifs) {
-        ERROR_FMT_("Failed to open input file: {}", in_fn);
+        ERROR_FMT_("Failed to open input file: {}", in_fn)
+            .hint(_("If access is denied, the path may be outside the Landlock sandbox — use a path within the current mode's directories."));
         return Result(1);
     }
     
@@ -56,7 +57,8 @@ Result clone(const char * in_fn, const char * out_fn, const char * uuid_str, con
     std::ofstream ofs(out_fn, std::ios::binary);
     ofs.write(out_buffer.data(), static_cast<std::streamsize>(out_buffer.size()));
     if (!ofs) {
-        ERROR_FMT_("Failed to write cloned image to {}: {}", out_fn, std::strerror(errno));
+        ERROR_FMT_("Failed to write cloned image to {}: {}", out_fn, std::strerror(errno))
+            .hint(_("If access is denied, the path may be outside the Landlock sandbox — use a path within the current mode's directories."));
         return Result(1);
     }
 

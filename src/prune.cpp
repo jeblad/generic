@@ -40,7 +40,7 @@ static void try_remove(const std::filesystem::path& p, bool force) {
     }
     std::error_code ec;
     std::filesystem::remove(p, ec);
-    if (ec) WARNING_FMT_(_("Failed to remove {}: {}"), p.string(), ec.message());
+    if (ec) WARNING_FMT_("Failed to remove {}: {}", p.string(), ec.message());
     else    std::cout << "    " << _("removed: ") << p.string() << "\n";
 }
 
@@ -112,7 +112,7 @@ Result prune(
     if (!filter.empty()) {
         for (const auto& af : candidates) {
             if (af.running) {
-                ERROR_FMT_(_("Agent {} is still running. Stop it before cleaning up."), af.stem);
+                ERROR_FMT_("Agent {} is still running. Stop it before cleaning up.", af.stem);
                 return Result(1);
             }
         }
@@ -126,10 +126,9 @@ Result prune(
                   << "  " << _("PID file:  ") << af.pid.string()   << "  [" << file_status(af.pid)  << "]\n";
 
         if (!af.mmio.empty() && !remove_mmio && !remove_beve)
-            std::cout << "  " << rlog::i18n::format(
-                _("hint: MMIO state is available — run 'hera rebuild {}' to recover."), af.stem) << "\n";
+            USER_FMT_("MMIO state is available — run `hera rebuild {}` to recover.", af.stem);
 
-        if (!force) std::cout << "  " << _("(use --force to remove)\n");
+        if (!force) USER_("Use --force to remove — agent state will be permanently deleted.");
 
         if (remove_beve) try_remove(af.beve, force);
         if (remove_mmio) try_remove(af.mmio, force);

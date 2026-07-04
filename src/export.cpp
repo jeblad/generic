@@ -75,7 +75,7 @@ Result agent_export(
     if (copied == 0)
         NOTICE_("No BEVE files found to export.");
     else
-        INFO_FMT_("Exported {} agent file(s) to {}.", copied, to_state.string());
+        INFO_NFMT_("Exported one agent file to {1}.", "Exported {0} agent files to {1}.", copied, copied, to_state.string());
 
     return Result(0);
 }

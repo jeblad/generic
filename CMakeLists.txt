@@ -41,6 +41,13 @@ if(NOT DEFINED PORTABLE_BUILD)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=native")
 endif()
 # --- Dependencies ---
+# Capture the user's BUILD_TESTING intent before fetched deps can override it.
+# Their test files may fail under this project's -Werror flags.
+if(NOT DEFINED BUILD_TESTING)
+    set(BUILD_TESTING ON)
+endif()
+set(_GENERIC_BUILD_TESTING ${BUILD_TESTING})
+set(BUILD_TESTING OFF CACHE BOOL "" FORCE)
 
 if(NOT TARGET glaze::glaze)
     FetchContent_Declare(
@@ -168,8 +175,11 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/cmake/Gettext_helpers.cmake")
             --keyword=_ --keyword=N_ 
             --keyword=fmt_:1
             --keyword=n_:1,2
-            --keyword=ERROR_FMT_:1 --keyword=WARN_FMT_:1 
+            --keyword=ERROR_FMT_:1 --keyword=WARN_FMT_:1
             --keyword=INFO_FMT_:1 --keyword=DEBUG_FMT_:1
+            --keyword=USER_:1 --keyword=USER_FMT_:1
+            --keyword=INFO_NFMT_:1,2 --keyword=NOTICE_NFMT_:1,2
+            --keyword=WARNING_NFMT_:1,2 --keyword=ERROR_NFMT_:1,2
     )
 endif()
 
@@ -220,7 +230,8 @@ endif()
 
 # --- Testing Setup ---
 
-option(BUILD_TESTING "Build unit tests for the plugin" ON)
+# Restore the user's BUILD_TESTING intent (captured before dependencies were fetched)
+set(BUILD_TESTING ${_GENERIC_BUILD_TESTING} CACHE BOOL "Build unit tests for the plugin" FORCE)
 
 if(BUILD_TESTING)
     enable_testing()
@@ -264,6 +275,7 @@ if(BUILD_TESTING)
     )
     
     target_compile_definitions(test_generic PRIVATE _GLIBCXX_HOSTED=1)
+    target_compile_options(test_generic PRIVATE -UNDEBUG)
     add_test(NAME generic_api_check COMMAND test_generic)
 endif()
 

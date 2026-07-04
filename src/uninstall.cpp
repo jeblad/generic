@@ -56,7 +56,8 @@ Result uninstall(
     if (fs::is_directory(target_path)) target_path /= source_path.filename();
 
     if (!(flags & HERA_FORCE) && fs::exists(target_path)) {
-        ERROR_FMT_("Target file exists: {}", target_path.string());
+        ERROR_FMT_("Target file exists: {}", target_path.string())
+            .hint(_("Use --force to overwrite — existing backup will be lost."));
         return Result(1);
     }
 
@@ -75,12 +76,14 @@ Result uninstall(
 
     std::ofstream ofs_out(target_path, std::ios::binary);
     if (!ofs_out) {
-        ERROR_FMT_("Failed to open output file {}: {}", target_path.string(), std::strerror(errno));
+        ERROR_FMT_("Failed to open output file {}: {}", target_path.string(), std::strerror(errno))
+            .hint(_("If access is denied, the path may be outside the Landlock sandbox — use a path within the current mode's directories."));
         return Result(1);
     }
     ofs_out.write(out_buffer.data(), static_cast<std::streamsize>(out_buffer.size()));
     if (!ofs_out) { // Check for error writing to output file
-        ERROR_FMT_("Failed to write agent image to {}: {}", target_path.string(), std::strerror(errno));
+        ERROR_FMT_("Failed to write agent image to {}: {}", target_path.string(), std::strerror(errno))
+            .hint(_("If access is denied, the path may be outside the Landlock sandbox — use a path within the current mode's directories."));
         return Result(1);
     }
 

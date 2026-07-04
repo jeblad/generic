@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: generic\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-04 01:45+0200\n"
+"POT-Creation-Date: 2026-07-04 16:56+0200\n"
 "PO-Revision-Date: 2026-07-04 00:00+0200\n"
 "Last-Translator: John Erling Blad <jeblad@gmail.com>\n"
 "Language-Team: Swedish\n"
@@ -34,19 +34,19 @@ msgstr "Gick in i {}()"
 
 #: /home/john/spaces/generic/src/about.cpp:84
 #: /home/john/spaces/generic/src/about.cpp:115
-#: /home/john/spaces/generic/src/about.cpp:157
+#: /home/john/spaces/generic/src/about.cpp:158
 msgid "Description:"
 msgstr "Beskrivning:"
 
 #: /home/john/spaces/generic/src/about.cpp:86
 #: /home/john/spaces/generic/src/about.cpp:117
-#: /home/john/spaces/generic/src/about.cpp:159
+#: /home/john/spaces/generic/src/about.cpp:160
 msgid "Homepage:"
 msgstr "Hemsida:"
 
 #: /home/john/spaces/generic/src/about.cpp:88
 #: /home/john/spaces/generic/src/about.cpp:119
-#: /home/john/spaces/generic/src/about.cpp:161
+#: /home/john/spaces/generic/src/about.cpp:162
 msgid "Version:"
 msgstr "Version:"
 
@@ -57,25 +57,25 @@ msgstr "API-nivå:"
 
 #: /home/john/spaces/generic/src/about.cpp:92
 #: /home/john/spaces/generic/src/about.cpp:123
-#: /home/john/spaces/generic/src/about.cpp:167
+#: /home/john/spaces/generic/src/about.cpp:168
 msgid "License:"
 msgstr "Licens:"
 
 #: /home/john/spaces/generic/src/about.cpp:94
 #: /home/john/spaces/generic/src/about.cpp:125
-#: /home/john/spaces/generic/src/about.cpp:169
+#: /home/john/spaces/generic/src/about.cpp:170
 msgid "Copyright:"
 msgstr "Upphovsrätt:"
 
 #: /home/john/spaces/generic/src/about.cpp:96
 #: /home/john/spaces/generic/src/about.cpp:127
-#: /home/john/spaces/generic/src/about.cpp:171
+#: /home/john/spaces/generic/src/about.cpp:172
 msgid "Creator:"
 msgstr "Skapare:"
 
 #: /home/john/spaces/generic/src/about.cpp:98
 #: /home/john/spaces/generic/src/about.cpp:129
-#: /home/john/spaces/generic/src/about.cpp:178
+#: /home/john/spaces/generic/src/about.cpp:179
 msgid "Contributors:"
 msgstr "Bidragsgivare:"
 
@@ -97,15 +97,20 @@ msgstr "Översättare:"
 msgid "Failed to read agent metadata: {}"
 msgstr "Kunde inte läsa agentmetadata: {}"
 
-#: /home/john/spaces/generic/src/about.cpp:163
+#: /home/john/spaces/generic/src/about.cpp:150
+msgid "MMIO state is available — run `hera rebuild` to recover."
+msgstr ""
+"MMIO-tillstånd är tillgängligt – kör `hera rebuild` för att återställa."
+
+#: /home/john/spaces/generic/src/about.cpp:164
 msgid "Model:"
 msgstr "Modell:"
 
-#: /home/john/spaces/generic/src/about.cpp:165
+#: /home/john/spaces/generic/src/about.cpp:166
 msgid "Epoch:"
 msgstr "Epok:"
 
-#: /home/john/spaces/generic/src/about.cpp:188
+#: /home/john/spaces/generic/src/about.cpp:189
 msgid "Provenance:"
 msgstr "Proveniens:"
 
@@ -114,14 +119,26 @@ msgstr "Proveniens:"
 msgid "Failed to open input file: {}"
 msgstr "Kunde inte öppna indatafil: {}"
 
-#: /home/john/spaces/generic/src/clone.cpp:36
+#: /home/john/spaces/generic/src/clone.cpp:24
+#: /home/john/spaces/generic/src/clone.cpp:61
+#: /home/john/spaces/generic/src/init.cpp:68
+#: /home/john/spaces/generic/src/uninstall.cpp:80
+#: /home/john/spaces/generic/src/uninstall.cpp:86
+msgid ""
+"If access is denied, the path may be outside the Landlock sandbox — use a "
+"path within the current mode's directories."
+msgstr ""
+"Om åtkomst nekas – sökvägen kan vara utanför Landlock-sandlådan. "
+"Använd en sökväg inom den aktuella lägets kataloger."
+
+#: /home/john/spaces/generic/src/clone.cpp:37
 #: /home/john/spaces/generic/src/install.cpp:41
 #: /home/john/spaces/generic/src/uninstall.cpp:41
 #, c++-format
 msgid "Failed to read agent metadata from {}: {}"
 msgstr "Kunde inte läsa agentmetadata från {}: {}"
 
-#: /home/john/spaces/generic/src/clone.cpp:59
+#: /home/john/spaces/generic/src/clone.cpp:60
 #, c++-format
 msgid "Failed to write cloned image to {}: {}"
 msgstr "Kunde inte skriva klonad avbild till {}: {}"
@@ -161,8 +178,10 @@ msgstr "Skrivfel för: {}"
 
 #: /home/john/spaces/generic/src/export.cpp:78
 #, c++-format
-msgid "Exported {} agent file(s) to {}."
-msgstr "Exporterade {} agentfil(er) till {}."
+msgid "Exported one agent file to {1}."
+msgid_plural "Exported {0} agent files to {1}."
+msgstr[0] "Exporterade en agentfil till {1}."
+msgstr[1] "Exporterade {0} agentfiler till {1}."
 
 #: /home/john/spaces/generic/src/import.cpp:31
 #, c++-format
@@ -171,8 +190,10 @@ msgstr "Källans tillståndskatalog hittades inte: {}"
 
 #: /home/john/spaces/generic/src/import.cpp:78
 #, c++-format
-msgid "Imported {} agent file(s) from {}."
-msgstr "Importerade {} agentfil(er) från {}."
+msgid "Imported one agent file from {1}."
+msgid_plural "Imported {0} agent files from {1}."
+msgstr[0] "Importerade en agentfil från {1}."
+msgstr[1] "Importerade {0} agentfiler från {1}."
 
 #: /home/john/spaces/generic/src/init.cpp:67
 #, c++-format
@@ -184,14 +205,19 @@ msgstr "Kunde inte kopiera {} till {}"
 msgid "Target file already exists: {}"
 msgstr "Målfilen finns redan: {}"
 
-#: /home/john/spaces/generic/src/install.cpp:79
+#: /home/john/spaces/generic/src/install.cpp:58
+msgid "Use --force to overwrite — existing agent data will be lost."
+msgstr ""
+"Använd --force för att skriva över — befintliga agentdata går förlorade."
+
+#: /home/john/spaces/generic/src/install.cpp:80
 #, c++-format
 msgid "Failed to remove source: {}"
 msgstr "Kunde inte ta bort källfil: {}"
 
-#: /home/john/spaces/generic/src/install.cpp:85
+#: /home/john/spaces/generic/src/install.cpp:86
 #: /home/john/spaces/generic/src/list.cpp:41
-#: /home/john/spaces/generic/src/uninstall.cpp:96
+#: /home/john/spaces/generic/src/uninstall.cpp:99
 msgid "no nickname"
 msgstr "inget smeknamn"
 
@@ -219,11 +245,6 @@ msgstr "hittades"
 msgid "would remove: "
 msgstr "skulle ta bort: "
 
-#: /home/john/spaces/generic/src/prune.cpp:43
-#, c++-format
-msgid "Failed to remove {}: {}"
-msgstr "Kunde inte ta bort {}: {}"
-
 #: /home/john/spaces/generic/src/prune.cpp:44
 msgid "removed: "
 msgstr "borttagen: "
@@ -245,14 +266,15 @@ msgstr "MMIO-fil: "
 msgid "PID file:  "
 msgstr "PID-fil:  "
 
-#: /home/john/spaces/generic/src/prune.cpp:130
+#: /home/john/spaces/generic/src/prune.cpp:129
 #, c++-format
-msgid "hint: MMIO state is available — run 'hera rebuild {}' to recover."
-msgstr "tips: MMIO-tillstånd är tillgängligt — kör 'hera rebuild {}' för att återställa."
+msgid "MMIO state is available — run `hera rebuild {}` to recover."
+msgstr ""
+"MMIO-tillstånd är tillgängligt – kör `hera rebuild {}` för att återställa."
 
-#: /home/john/spaces/generic/src/prune.cpp:132
-msgid "(use --force to remove)\n"
-msgstr "(använd --force för att ta bort)\n"
+#: /home/john/spaces/generic/src/prune.cpp:131
+msgid "Use --force to remove — agent state will be permanently deleted."
+msgstr "Använd --force för att ta bort – agentens tillstånd raderas permanent."
 
 #: /home/john/spaces/generic/src/uninstall.cpp:51
 #, c++-format
@@ -264,17 +286,26 @@ msgstr "Avinstallation avbruten: Agent {} körs."
 msgid "Target file exists: {}"
 msgstr "Målfilen finns: {}"
 
-#: /home/john/spaces/generic/src/uninstall.cpp:78
+#: /home/john/spaces/generic/src/uninstall.cpp:60
+msgid "Use --force to overwrite — existing backup will be lost."
+msgstr ""
+"Använd --force för att skriva över — befintlig säkerhetskopia går förlorad."
+
+#: /home/john/spaces/generic/src/uninstall.cpp:79
 #, c++-format
 msgid "Failed to open output file {}: {}"
 msgstr "Kunde inte öppna utdatafil {}: {}"
 
-#: /home/john/spaces/generic/src/uninstall.cpp:83
+#: /home/john/spaces/generic/src/uninstall.cpp:85
 #, c++-format
 msgid "Failed to write agent image to {}: {}"
 msgstr "Kunde inte skriva agentavbild till {}: {}"
 
-#: /home/john/spaces/generic/src/uninstall.cpp:90
+#: /home/john/spaces/generic/src/uninstall.cpp:93
 #, c++-format
 msgid "Failed to remove source file after uninstall: {}."
 msgstr "Kunde inte ta bort källfil efter avinstallation: {}."
+
+#, c++-format
+#~ msgid "Failed to remove {}: {}"
+#~ msgstr "Kunde inte ta bort {}: {}"

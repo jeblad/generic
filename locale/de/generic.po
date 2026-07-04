@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: generic\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-04 01:45+0200\n"
+"POT-Creation-Date: 2026-07-04 16:56+0200\n"
 "PO-Revision-Date: 2026-07-04 00:00+0200\n"
 "Last-Translator: John Erling Blad <jeblad@gmail.com>\n"
 "Language-Team: German\n"
@@ -34,19 +34,19 @@ msgstr "{}() betreten"
 
 #: /home/john/spaces/generic/src/about.cpp:84
 #: /home/john/spaces/generic/src/about.cpp:115
-#: /home/john/spaces/generic/src/about.cpp:157
+#: /home/john/spaces/generic/src/about.cpp:158
 msgid "Description:"
 msgstr "Beschreibung:"
 
 #: /home/john/spaces/generic/src/about.cpp:86
 #: /home/john/spaces/generic/src/about.cpp:117
-#: /home/john/spaces/generic/src/about.cpp:159
+#: /home/john/spaces/generic/src/about.cpp:160
 msgid "Homepage:"
 msgstr "Webseite:"
 
 #: /home/john/spaces/generic/src/about.cpp:88
 #: /home/john/spaces/generic/src/about.cpp:119
-#: /home/john/spaces/generic/src/about.cpp:161
+#: /home/john/spaces/generic/src/about.cpp:162
 msgid "Version:"
 msgstr "Version:"
 
@@ -57,25 +57,25 @@ msgstr "API-Ebene:"
 
 #: /home/john/spaces/generic/src/about.cpp:92
 #: /home/john/spaces/generic/src/about.cpp:123
-#: /home/john/spaces/generic/src/about.cpp:167
+#: /home/john/spaces/generic/src/about.cpp:168
 msgid "License:"
 msgstr "Lizenz:"
 
 #: /home/john/spaces/generic/src/about.cpp:94
 #: /home/john/spaces/generic/src/about.cpp:125
-#: /home/john/spaces/generic/src/about.cpp:169
+#: /home/john/spaces/generic/src/about.cpp:170
 msgid "Copyright:"
 msgstr "Urheberrecht:"
 
 #: /home/john/spaces/generic/src/about.cpp:96
 #: /home/john/spaces/generic/src/about.cpp:127
-#: /home/john/spaces/generic/src/about.cpp:171
+#: /home/john/spaces/generic/src/about.cpp:172
 msgid "Creator:"
 msgstr "Ersteller:"
 
 #: /home/john/spaces/generic/src/about.cpp:98
 #: /home/john/spaces/generic/src/about.cpp:129
-#: /home/john/spaces/generic/src/about.cpp:178
+#: /home/john/spaces/generic/src/about.cpp:179
 msgid "Contributors:"
 msgstr "Mitwirkende:"
 
@@ -96,15 +96,21 @@ msgstr "Übersetzer:"
 msgid "Failed to read agent metadata: {}"
 msgstr "Agentenmetadaten konnten nicht gelesen werden: {}"
 
-#: /home/john/spaces/generic/src/about.cpp:163
+#: /home/john/spaces/generic/src/about.cpp:150
+msgid "MMIO state is available — run `hera rebuild` to recover."
+msgstr ""
+"MMIO-Zustand ist verfügbar – führen Sie `hera rebuild` aus, um "
+"wiederherzustellen."
+
+#: /home/john/spaces/generic/src/about.cpp:164
 msgid "Model:"
 msgstr "Modell:"
 
-#: /home/john/spaces/generic/src/about.cpp:165
+#: /home/john/spaces/generic/src/about.cpp:166
 msgid "Epoch:"
 msgstr "Epoche:"
 
-#: /home/john/spaces/generic/src/about.cpp:188
+#: /home/john/spaces/generic/src/about.cpp:189
 msgid "Provenance:"
 msgstr "Provenienz:"
 
@@ -113,14 +119,27 @@ msgstr "Provenienz:"
 msgid "Failed to open input file: {}"
 msgstr "Eingabedatei konnte nicht geöffnet werden: {}"
 
-#: /home/john/spaces/generic/src/clone.cpp:36
+#: /home/john/spaces/generic/src/clone.cpp:24
+#: /home/john/spaces/generic/src/clone.cpp:61
+#: /home/john/spaces/generic/src/init.cpp:68
+#: /home/john/spaces/generic/src/uninstall.cpp:80
+#: /home/john/spaces/generic/src/uninstall.cpp:86
+msgid ""
+"If access is denied, the path may be outside the Landlock sandbox — use a "
+"path within the current mode's directories."
+msgstr ""
+"Falls der Zugriff verweigert wird – der Pfad liegt möglicherweise außerhalb "
+"der Landlock-Sandbox. Verwenden Sie einen Pfad in den Verzeichnissen des "
+"aktuellen Modus."
+
+#: /home/john/spaces/generic/src/clone.cpp:37
 #: /home/john/spaces/generic/src/install.cpp:41
 #: /home/john/spaces/generic/src/uninstall.cpp:41
 #, c++-format
 msgid "Failed to read agent metadata from {}: {}"
 msgstr "Agentenmetadaten konnten nicht aus »{}« gelesen werden: {}"
 
-#: /home/john/spaces/generic/src/clone.cpp:59
+#: /home/john/spaces/generic/src/clone.cpp:60
 #, c++-format
 msgid "Failed to write cloned image to {}: {}"
 msgstr "Geklontes Abbild konnte nicht nach »{}« geschrieben werden: {}"
@@ -160,8 +179,10 @@ msgstr "Schreibfehler für: {}"
 
 #: /home/john/spaces/generic/src/export.cpp:78
 #, c++-format
-msgid "Exported {} agent file(s) to {}."
-msgstr "{} Agentendatei(en) nach »{}« exportiert."
+msgid "Exported one agent file to {1}."
+msgid_plural "Exported {0} agent files to {1}."
+msgstr[0] "Eine Agentendatei nach {1} exportiert."
+msgstr[1] "{0} Agentendateien nach {1} exportiert."
 
 #: /home/john/spaces/generic/src/import.cpp:31
 #, c++-format
@@ -170,8 +191,10 @@ msgstr "Zustandsverzeichnis der Quelle nicht gefunden: {}"
 
 #: /home/john/spaces/generic/src/import.cpp:78
 #, c++-format
-msgid "Imported {} agent file(s) from {}."
-msgstr "{} Agentendatei(en) aus »{}« importiert."
+msgid "Imported one agent file from {1}."
+msgid_plural "Imported {0} agent files from {1}."
+msgstr[0] "Eine Agentendatei aus {1} importiert."
+msgstr[1] "{0} Agentendateien aus {1} importiert."
 
 #: /home/john/spaces/generic/src/init.cpp:67
 #, c++-format
@@ -183,14 +206,20 @@ msgstr "»{}« konnte nicht nach »{}« kopiert werden"
 msgid "Target file already exists: {}"
 msgstr "Zieldatei existiert bereits: {}"
 
-#: /home/john/spaces/generic/src/install.cpp:79
+#: /home/john/spaces/generic/src/install.cpp:58
+msgid "Use --force to overwrite — existing agent data will be lost."
+msgstr ""
+"Verwenden Sie --force zum Überschreiben — vorhandene Agentendaten gehen "
+"verloren."
+
+#: /home/john/spaces/generic/src/install.cpp:80
 #, c++-format
 msgid "Failed to remove source: {}"
 msgstr "Quelldatei konnte nicht entfernt werden: {}"
 
-#: /home/john/spaces/generic/src/install.cpp:85
+#: /home/john/spaces/generic/src/install.cpp:86
 #: /home/john/spaces/generic/src/list.cpp:41
-#: /home/john/spaces/generic/src/uninstall.cpp:96
+#: /home/john/spaces/generic/src/uninstall.cpp:99
 msgid "no nickname"
 msgstr "kein Spitzname"
 
@@ -218,11 +247,6 @@ msgstr "gefunden"
 msgid "would remove: "
 msgstr "würde entfernen: "
 
-#: /home/john/spaces/generic/src/prune.cpp:43
-#, c++-format
-msgid "Failed to remove {}: {}"
-msgstr "»{}« konnte nicht entfernt werden: {}"
-
 #: /home/john/spaces/generic/src/prune.cpp:44
 msgid "removed: "
 msgstr "entfernt: "
@@ -244,14 +268,18 @@ msgstr "MMIO-Datei: "
 msgid "PID file:  "
 msgstr "PID-Datei:  "
 
-#: /home/john/spaces/generic/src/prune.cpp:130
+#: /home/john/spaces/generic/src/prune.cpp:129
 #, c++-format
-msgid "hint: MMIO state is available — run 'hera rebuild {}' to recover."
-msgstr "Hinweis: MMIO-Zustand ist verfügbar — führen Sie »hera rebuild {}« aus, um wiederherzustellen."
+msgid "MMIO state is available — run `hera rebuild {}` to recover."
+msgstr ""
+"MMIO-Zustand ist verfügbar – führen Sie `hera rebuild {}` aus, um "
+"wiederherzustellen."
 
-#: /home/john/spaces/generic/src/prune.cpp:132
-msgid "(use --force to remove)\n"
-msgstr "(--force zum Entfernen verwenden)\n"
+#: /home/john/spaces/generic/src/prune.cpp:131
+msgid "Use --force to remove — agent state will be permanently deleted."
+msgstr ""
+"Verwenden Sie --force zum Entfernen – der Agentenzustand wird dauerhaft "
+"gelöscht."
 
 #: /home/john/spaces/generic/src/uninstall.cpp:51
 #, c++-format
@@ -263,17 +291,27 @@ msgstr "Deinstallation abgebrochen: Agent {} läuft."
 msgid "Target file exists: {}"
 msgstr "Zieldatei existiert: {}"
 
-#: /home/john/spaces/generic/src/uninstall.cpp:78
+#: /home/john/spaces/generic/src/uninstall.cpp:60
+msgid "Use --force to overwrite — existing backup will be lost."
+msgstr ""
+"Verwenden Sie --force zum Überschreiben — vorhandene Sicherungskopie geht "
+"verloren."
+
+#: /home/john/spaces/generic/src/uninstall.cpp:79
 #, c++-format
 msgid "Failed to open output file {}: {}"
 msgstr "Ausgabedatei »{}« konnte nicht geöffnet werden: {}"
 
-#: /home/john/spaces/generic/src/uninstall.cpp:83
+#: /home/john/spaces/generic/src/uninstall.cpp:85
 #, c++-format
 msgid "Failed to write agent image to {}: {}"
 msgstr "Agentenabbild konnte nicht nach »{}« geschrieben werden: {}"
 
-#: /home/john/spaces/generic/src/uninstall.cpp:90
+#: /home/john/spaces/generic/src/uninstall.cpp:93
 #, c++-format
 msgid "Failed to remove source file after uninstall: {}."
 msgstr "Quelldatei konnte nach der Deinstallation nicht entfernt werden: »{}«."
+
+#, c++-format
+#~ msgid "Failed to remove {}: {}"
+#~ msgstr "»{}« konnte nicht entfernt werden: {}"
