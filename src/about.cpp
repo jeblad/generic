@@ -139,7 +139,8 @@ Result about_system(int flags) {
 
 Result about_module(const char* filename, int flags) {
     if (!filename || *filename == '\0' || !std::filesystem::exists(filename)) {
-        ERROR_("Agent file not found for 'about' request.");
+        ERROR_("Agent file not found for 'about' request.")
+            .hint(_("Check that the correct mode is selected (--developer/--private/--system), or run `hera list` to see available agents."));
         return Result(1);
     }
 

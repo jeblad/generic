@@ -2,8 +2,11 @@
 
 ## Dash conventions
 
-The English source strings use **em dash** (—) without spaces, following American English convention.
-Translations should use the typographic convention of the target language:
+The English source strings use **em dash** (—) without spaces. This follows the American English
+typographic standard (AP/Chicago style) and was chosen deliberately: em dash is visually distinct
+from en dash (used in numeric ranges, e.g. 1–10) and from hyphen, so the role of the punctuation
+is unambiguous even in a monospace terminal. Translations should use the typographic convention of
+the target language:
 
 | Language | Dash | Example |
 | --- | --- | --- |
@@ -15,16 +18,55 @@ Translations should use the typographic convention of the target language:
 | French (fr) | em dash — with spaces | `Utiliser --force — les données seront perdues.` |
 | Dutch (nl) | en dash – with spaces | `Gebruik --force – gegevens gaan verloren.` |
 
+## Quote conventions
+
+Quotation marks are used for **explicit arguments** — values named inside the sentence (agent
+identifiers, filenames, paths) that appear before or around a colon. They are **not** used for
+**implicit arguments** — values introduced by a colon at the end of the message.
+
+```text
+"Agent '{}' is running."          ← explicit: agent name inside the sentence → quote it
+"Failed to open: {}"              ← implicit: colon introduces the value → no quotes
+"Failed to read from '{}': {}"    ← first {} is explicit, second is implicit
+```
+
+The English source strings use **ASCII single quotes** (`'...'`). This was chosen deliberately:
+ASCII single quotes are safe for all C++ compilers and gettext tools without encoding concerns,
+they do not conflict with the C++ string delimiter (double quote `"`), and they are clearly
+visible in monospace terminals. Translations should use the typographic quotation marks of the
+target language:
+
+| Language | Quotes | Example |
+| --- | --- | --- |
+| English (source) | `'...'` ASCII single | `Agent 'r2d2' is running.` |
+| Norwegian (nb, nn) | «…» | `Agenten «r2d2» kjører.` |
+| Danish (da) | »…« | `Agenten »r2d2« kører.` |
+| Swedish (sv) | "…" | `Agenten "r2d2" kör.` |
+| German (de) | „…" | `Agent „r2d2" läuft.` |
+| French (fr) | « … » (with spaces) | `L'agent « r2d2 » est en cours.` |
+| Dutch (nl) | '…' | `De agent 'r2d2' draait.` |
+
+Do **not** use quotation marks around commands or code — use backticks instead (see below).
+
 ## Code and commands
 
 Use **backticks** for commands, subcommands, flags, and any code in both source strings and
-translations. This applies regardless of the target language's normal quotation style.
+translations. This applies regardless of the target language's normal quotation style, and
+regardless of whether the name is a runtime value (`{}` placeholder) or a static literal
+embedded directly in the string.
 
 ```text
 `hera rebuild`      — correct
 'hera rebuild'      — incorrect
 »hera rebuild«      — incorrect
 « hera rebuild »    — incorrect
+```
+
+This includes subcommand names written as static text:
+
+```text
+"Agent file not found for `about` request."    ← correct
+"Agent file not found for 'about' request."    ← incorrect
 ```
 
 ## Hint messages

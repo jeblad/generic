@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: generic\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-04 16:56+0200\n"
+"Report-Msgid-Bugs-To: https://github.com/jeblad/generic/issues\n"
+"POT-Creation-Date: 2026-07-05 12:54+0200\n"
 "PO-Revision-Date: 2026-07-04 00:00+0200\n"
 "Last-Translator: John Erling Blad <jeblad@gmail.com>\n"
 "Language-Team: Danish\n"
@@ -17,36 +17,21 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: /home/john/spaces/generic/src/generic.cpp:38
-#: /home/john/spaces/generic/src/generic.cpp:53
-#: /home/john/spaces/generic/src/generic.cpp:69
-#: /home/john/spaces/generic/src/generic.cpp:84
-#: /home/john/spaces/generic/src/generic.cpp:98
-#: /home/john/spaces/generic/src/generic.cpp:112
-#: /home/john/spaces/generic/src/generic.cpp:127
-#: /home/john/spaces/generic/src/generic.cpp:142
-#: /home/john/spaces/generic/src/generic.cpp:157
-#: /home/john/spaces/generic/src/generic.cpp:172
-#: /home/john/spaces/generic/src/generic.cpp:187
-#, c++-format
-msgid "Entered {}()"
-msgstr "Gik ind i {}()"
-
 #: /home/john/spaces/generic/src/about.cpp:84
 #: /home/john/spaces/generic/src/about.cpp:115
-#: /home/john/spaces/generic/src/about.cpp:158
+#: /home/john/spaces/generic/src/about.cpp:159
 msgid "Description:"
 msgstr "Beskrivelse:"
 
 #: /home/john/spaces/generic/src/about.cpp:86
 #: /home/john/spaces/generic/src/about.cpp:117
-#: /home/john/spaces/generic/src/about.cpp:160
+#: /home/john/spaces/generic/src/about.cpp:161
 msgid "Homepage:"
 msgstr "Hjemmeside:"
 
 #: /home/john/spaces/generic/src/about.cpp:88
 #: /home/john/spaces/generic/src/about.cpp:119
-#: /home/john/spaces/generic/src/about.cpp:162
+#: /home/john/spaces/generic/src/about.cpp:163
 msgid "Version:"
 msgstr "Version:"
 
@@ -57,25 +42,25 @@ msgstr "API-niveau:"
 
 #: /home/john/spaces/generic/src/about.cpp:92
 #: /home/john/spaces/generic/src/about.cpp:123
-#: /home/john/spaces/generic/src/about.cpp:168
+#: /home/john/spaces/generic/src/about.cpp:169
 msgid "License:"
 msgstr "Licens:"
 
 #: /home/john/spaces/generic/src/about.cpp:94
 #: /home/john/spaces/generic/src/about.cpp:125
-#: /home/john/spaces/generic/src/about.cpp:170
+#: /home/john/spaces/generic/src/about.cpp:171
 msgid "Copyright:"
 msgstr "Ophavsret:"
 
 #: /home/john/spaces/generic/src/about.cpp:96
 #: /home/john/spaces/generic/src/about.cpp:127
-#: /home/john/spaces/generic/src/about.cpp:172
+#: /home/john/spaces/generic/src/about.cpp:173
 msgid "Creator:"
 msgstr "Ophavsmand:"
 
 #: /home/john/spaces/generic/src/about.cpp:98
 #: /home/john/spaces/generic/src/about.cpp:129
-#: /home/john/spaces/generic/src/about.cpp:179
+#: /home/john/spaces/generic/src/about.cpp:180
 msgid "Contributors:"
 msgstr "Bidragydere:"
 
@@ -92,26 +77,42 @@ msgstr ""
 msgid "Translators:"
 msgstr "Oversættere:"
 
-#: /home/john/spaces/generic/src/about.cpp:149
+#: /home/john/spaces/generic/src/about.cpp:142
+msgid "Agent file not found for 'about' request."
+msgstr "Agentfil ikke fundet for 'about'-forespørgsel."
+
+#: /home/john/spaces/generic/src/about.cpp:143
+msgid ""
+"Check that the correct mode is selected (--developer/--private/--system), or "
+"run `hera list` to see available agents."
+msgstr ""
+"Kontroller, at den korrekte tilstand er valgt (--developer/--private/--"
+"system), eller kør `hera list` for at se tilgængelige agenter."
+
+#: /home/john/spaces/generic/src/about.cpp:150
 #, c++-format
 msgid "Failed to read agent metadata: {}"
 msgstr "Kunne ikke læse agentmetadata: {}"
 
-#: /home/john/spaces/generic/src/about.cpp:150
+#: /home/john/spaces/generic/src/about.cpp:151
 msgid "MMIO state is available — run `hera rebuild` to recover."
 msgstr "MMIO-tilstand er tilgængelig – kør `hera rebuild` for at gendanne."
 
-#: /home/john/spaces/generic/src/about.cpp:164
+#: /home/john/spaces/generic/src/about.cpp:165
 msgid "Model:"
 msgstr "Model:"
 
-#: /home/john/spaces/generic/src/about.cpp:166
+#: /home/john/spaces/generic/src/about.cpp:167
 msgid "Epoch:"
 msgstr "Epoke:"
 
-#: /home/john/spaces/generic/src/about.cpp:189
+#: /home/john/spaces/generic/src/about.cpp:190
 msgid "Provenance:"
 msgstr "Proveniens:"
+
+#: /home/john/spaces/generic/src/build.cpp:23
+msgid "Generic plugin does not support 'build' operations"
+msgstr "Det generiske plugin understøtter ikke 'build'-operationer"
 
 #: /home/john/spaces/generic/src/clone.cpp:23
 #, c++-format
@@ -127,8 +128,8 @@ msgid ""
 "If access is denied, the path may be outside the Landlock sandbox — use a "
 "path within the current mode's directories."
 msgstr ""
-"Hvis adgang nægtes – stien kan være uden for Landlock-sandkassen. "
-"Brug en sti inden for den aktuelle tilstands mapper."
+"Hvis adgang nægtes – stien kan være uden for Landlock-sandkassen. Brug en "
+"sti inden for den aktuelle tilstands mapper."
 
 #: /home/john/spaces/generic/src/clone.cpp:37
 #: /home/john/spaces/generic/src/install.cpp:41
@@ -147,15 +148,48 @@ msgstr "Kunne ikke skrive klonet aftryk til {}: {}"
 msgid "No PID file found for agent: {}"
 msgstr "Ingen PID-fil fundet for agent: {}"
 
-#: /home/john/spaces/generic/src/down.cpp:48
+#: /home/john/spaces/generic/src/down.cpp:43
+msgid "Failed to read PID file."
+msgstr "Kunne ikke læse PID-filen."
+
+#: /home/john/spaces/generic/src/down.cpp:44
+msgid ""
+"The PID file may be corrupt or from an older version — use `hera prune` to "
+"clean up stale files."
+msgstr ""
+"PID-filen er måske korrupt eller fra en ældre version – brug `hera prune` "
+"til at rydde op i forældede filer."
+
+#: /home/john/spaces/generic/src/down.cpp:49
 #, c++-format
 msgid "Failed to send SIGTERM to PID {}: {}"
 msgstr "Kunne ikke sende SIGTERM til PID {}: {}"
+
+#: /home/john/spaces/generic/src/down.cpp:66
+#, c++-format
+msgid "Agent {} did not stop in time — sending SIGKILL."
+msgstr "Agent {} stoppede ikke i tide – sender SIGKILL."
+
+#: /home/john/spaces/generic/src/down.cpp:71
+#, c++-format
+msgid "Agent {} did not stop within 5 s; use --force to send SIGKILL."
+msgstr "Agent {} stoppede ikke inden for 5 s; brug --force for at sende SIGKILL."
+
+#: /home/john/spaces/generic/src/down.cpp:79
+#, c++-format
+msgid "Agent {} stopped."
+msgstr "Agent {} er stoppet."
 
 #: /home/john/spaces/generic/src/export.cpp:31
 #, c++-format
 msgid "Workspace state directory not found: {}"
 msgstr "Arbejdsområdets tilstandsmappe blev ikke fundet: {}"
+
+#: /home/john/spaces/generic/src/export.cpp:42
+#: /home/john/spaces/generic/src/import.cpp:42
+#, c++-format
+msgid "Skipping existing: {}"
+msgstr "Springer eksisterende over: {}"
 
 #: /home/john/spaces/generic/src/export.cpp:49
 #: /home/john/spaces/generic/src/import.cpp:49
@@ -175,6 +209,15 @@ msgstr "Kan ikke oprette destination: {}"
 msgid "Write error for: {}"
 msgstr "Skrivefejl for: {}"
 
+#: /home/john/spaces/generic/src/export.cpp:71
+#, c++-format
+msgid "Exported: {}"
+msgstr "Eksporteret: {}"
+
+#: /home/john/spaces/generic/src/export.cpp:76
+msgid "No BEVE files found to export."
+msgstr "Ingen BEVE-filer fundet til eksport."
+
 #: /home/john/spaces/generic/src/export.cpp:78
 #, c++-format
 msgid "Exported one agent file to {1}."
@@ -182,10 +225,34 @@ msgid_plural "Exported {0} agent files to {1}."
 msgstr[0] "Eksporterede én agentfil til {1}."
 msgstr[1] "Eksporterede {0} agentfiler til {1}."
 
+#: /home/john/spaces/generic/src/generic.cpp:38
+#: /home/john/spaces/generic/src/generic.cpp:53
+#: /home/john/spaces/generic/src/generic.cpp:69
+#: /home/john/spaces/generic/src/generic.cpp:84
+#: /home/john/spaces/generic/src/generic.cpp:98
+#: /home/john/spaces/generic/src/generic.cpp:112
+#: /home/john/spaces/generic/src/generic.cpp:127
+#: /home/john/spaces/generic/src/generic.cpp:142
+#: /home/john/spaces/generic/src/generic.cpp:157
+#: /home/john/spaces/generic/src/generic.cpp:172
+#: /home/john/spaces/generic/src/generic.cpp:187
+#, c++-format
+msgid "Entered {}()"
+msgstr "Gik ind i {}()"
+
 #: /home/john/spaces/generic/src/import.cpp:31
 #, c++-format
 msgid "Source state directory not found: {}"
 msgstr "Kildens tilstandsmappe blev ikke fundet: {}"
+
+#: /home/john/spaces/generic/src/import.cpp:71
+#, c++-format
+msgid "Imported: {}"
+msgstr "Importeret: {}"
+
+#: /home/john/spaces/generic/src/import.cpp:76
+msgid "No BEVE files found to import."
+msgstr "Ingen BEVE-filer fundet til import."
 
 #: /home/john/spaces/generic/src/import.cpp:78
 #, c++-format
@@ -198,6 +265,24 @@ msgstr[1] "Importerede {0} agentfiler fra {1}."
 #, c++-format
 msgid "Failed to copy {} to {}"
 msgstr "Kunne ikke kopiere {} til {}"
+
+#: /home/john/spaces/generic/src/init.cpp:71
+#, c++-format
+msgid "Installed: lib/{}"
+msgstr "Installeret: lib/{}"
+
+#: /home/john/spaces/generic/src/init.cpp:83
+msgid "Failed to write hera.toml"
+msgstr "Kunne ikke skrive hera.toml"
+
+#: /home/john/spaces/generic/src/init.cpp:84
+msgid "The disk may be full."
+msgstr "Disken er måske fuld."
+
+#: /home/john/spaces/generic/src/init.cpp:90
+#, c++-format
+msgid "Workspace initialised in {}"
+msgstr "Arbejdsrum initialiseret i {}"
 
 #: /home/john/spaces/generic/src/install.cpp:57
 #, c++-format
@@ -218,6 +303,10 @@ msgstr "Kunne ikke fjerne kildefil: {}"
 #: /home/john/spaces/generic/src/uninstall.cpp:99
 msgid "no nickname"
 msgstr "intet kaldenavn"
+
+#: /home/john/spaces/generic/src/install.cpp:85
+msgid "Installed agent {} ({}) from {}."
+msgstr "Installerede agent {} ({}) fra {}."
 
 #: /home/john/spaces/generic/src/list.cpp:34
 msgid "ID"
@@ -240,36 +329,41 @@ msgid "found"
 msgstr "fundet"
 
 #: /home/john/spaces/generic/src/prune.cpp:38
-msgid "would remove: "
-msgstr "ville fjerne: "
+msgid "Would remove: {}"
+msgstr "Vil fjerne: {}"
+
+#: /home/john/spaces/generic/src/prune.cpp:43
+#, c++-format
+msgid "Failed to remove {}: {}"
+msgstr "Kunne ikke fjerne {}: {}"
 
 #: /home/john/spaces/generic/src/prune.cpp:44
-msgid "removed: "
-msgstr "fjernet: "
+msgid "Removed: {}"
+msgstr "Fjernet: {}"
 
 #: /home/john/spaces/generic/src/prune.cpp:115
 #, c++-format
 msgid "Agent {} is still running. Stop it before cleaning up."
 msgstr "Agent {} kører stadig. Stop den, før du rydder op."
 
-#: /home/john/spaces/generic/src/prune.cpp:124
-msgid "BEVE file: "
-msgstr "BEVE-fil: "
-
 #: /home/john/spaces/generic/src/prune.cpp:125
-msgid "MMIO file: "
-msgstr "MMIO-fil: "
+msgid "  BEVE file: {}  [{}]"
+msgstr "  BEVE-fil: {}  [{}]"
 
 #: /home/john/spaces/generic/src/prune.cpp:126
-msgid "PID file:  "
-msgstr "PID-fil:  "
+msgid "  MMIO file: {}  [{}]"
+msgstr "  MMIO-fil: {}  [{}]"
 
-#: /home/john/spaces/generic/src/prune.cpp:129
+#: /home/john/spaces/generic/src/prune.cpp:127
+msgid "  PID file:  {}  [{}]"
+msgstr "  PID-fil:  {}  [{}]"
+
+#: /home/john/spaces/generic/src/prune.cpp:130
 #, c++-format
 msgid "MMIO state is available — run `hera rebuild {}` to recover."
 msgstr "MMIO-tilstand er tilgængelig – kør `hera rebuild {}` for at gendanne."
 
-#: /home/john/spaces/generic/src/prune.cpp:131
+#: /home/john/spaces/generic/src/prune.cpp:132
 msgid "Use --force to remove — agent state will be permanently deleted."
 msgstr "Brug --force for at fjerne – agenttilstand slettes permanent."
 
@@ -286,7 +380,7 @@ msgstr "Målfilen findes: {}"
 #: /home/john/spaces/generic/src/uninstall.cpp:60
 msgid "Use --force to overwrite — existing backup will be lost."
 msgstr ""
-"Brug --force for at overskrive — eksisterende sikkerhedskopi vil gå tabt."
+"Brug --force for at overskrive – eksisterende sikkerhedskopi vil gå tabt."
 
 #: /home/john/spaces/generic/src/uninstall.cpp:79
 #, c++-format
@@ -303,6 +397,7 @@ msgstr "Kunne ikke skrive agentaftryk til {}: {}"
 msgid "Failed to remove source file after uninstall: {}."
 msgstr "Kunne ikke fjerne kildefil efter afinstallation: {}."
 
+#: /home/john/spaces/generic/src/uninstall.cpp:98
 #, c++-format
-#~ msgid "Failed to remove {}: {}"
-#~ msgstr "Kunne ikke fjerne {}: {}"
+msgid "Uninstalled agent {} ({}) to {}."
+msgstr "Afinstallerede agent {} ({}) til {}."

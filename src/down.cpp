@@ -40,7 +40,8 @@ Result down(
                      std::istreambuf_iterator<char>());
     hera::PidFileContent info;
     if (glz::read_json(info, buf)) {
-        ERROR_("Failed to read PID file.");
+        ERROR_("Failed to read PID file.")
+            .hint(_("The PID file may be corrupt or from an older version — use `hera prune` to clean up stale files."));
         return {1};
     }
 

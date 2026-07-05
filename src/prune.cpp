@@ -35,13 +35,13 @@ static std::string file_status(const std::filesystem::path& p) {
 static void try_remove(const std::filesystem::path& p, bool force) {
     if (p.empty() || !std::filesystem::exists(p)) return;
     if (!force) {
-        std::cout << "    " << _("would remove: ") << p.string() << "\n";
+        NOTICE_FMT_("Would remove: {}", p.string());
         return;
     }
     std::error_code ec;
     std::filesystem::remove(p, ec);
     if (ec) WARNING_FMT_("Failed to remove {}: {}", p.string(), ec.message());
-    else    std::cout << "    " << _("removed: ") << p.string() << "\n";
+    else    NOTICE_FMT_("Removed: {}", p.string());
 }
 
 } // anonymous namespace
@@ -120,10 +120,11 @@ Result prune(
 
     // Report and optionally remove.
     for (const auto& af : candidates) {
-        std::cout << af.stem << "\n"
-                  << "  " << _("BEVE file: ") << af.beve.string()  << "  [" << file_status(af.beve) << "]\n"
-                  << "  " << _("MMIO file: ") << af.mmio.string()  << "  [" << file_status(af.mmio) << "]\n"
-                  << "  " << _("PID file:  ") << af.pid.string()   << "  [" << file_status(af.pid)  << "]\n";
+        rlog::ContextGuard ctx(af.stem);
+        std::cout << af.stem << "\n";
+        NOTICE_FMT_("  BEVE file: {}  [{}]", af.beve.string(), file_status(af.beve));
+        NOTICE_FMT_("  MMIO file: {}  [{}]", af.mmio.string(), file_status(af.mmio));
+        NOTICE_FMT_("  PID file:  {}  [{}]", af.pid.string(),  file_status(af.pid));
 
         if (!af.mmio.empty() && !remove_mmio && !remove_beve)
             USER_FMT_("MMIO state is available — run `hera rebuild {}` to recover.", af.stem);

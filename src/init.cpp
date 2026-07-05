@@ -80,7 +80,8 @@ Result agent_init(
             ssize_t w = ::write(fd, content.c_str(), content.size());
             ::close(fd);
             if (w < 0) {
-                ERROR_("Failed to write hera.toml");
+                ERROR_("Failed to write hera.toml")
+                    .hint(_("The disk may be full."));
                 return Result(1);
             }
         }

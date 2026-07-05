@@ -59,13 +59,18 @@ if(NOT TARGET glaze::glaze)
 endif()
 
 if(NOT TARGET rlog)
-    FetchContent_Declare(
-        rlog
-        GIT_REPOSITORY git@github.com:jeblad/rlog.git
-        GIT_TAG        main
-        GIT_SHALLOW    TRUE
-    )
-    FetchContent_MakeAvailable(rlog)
+    if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/../rlog/CMakeLists.txt")
+        message(STATUS "Generic: Using sibling rlog from ../rlog")
+        add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/../rlog" "${CMAKE_BINARY_DIR}/rlog")
+    else()
+        FetchContent_Declare(
+            rlog
+            GIT_REPOSITORY git@github.com:jeblad/rlog.git
+            GIT_TAG        main
+            GIT_SHALLOW    TRUE
+        )
+        FetchContent_MakeAvailable(rlog)
+    endif()
 endif()
 
 if(NOT TARGET uuid_v4)
@@ -148,6 +153,7 @@ endif()
 
 # --- Translations (Gettext via Hera helpers) ---
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/cmake/Gettext_helpers.cmake")
+    get_target_property(RLOG_XGETTEXT_ARGS rlog RLOG_XGETTEXT_ARGS)
     include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/Gettext_helpers.cmake")
     configure_gettext(
         ALL
@@ -169,17 +175,10 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/cmake/Gettext_helpers.cmake")
             "${CMAKE_CURRENT_SOURCE_DIR}/src/uninstall.cpp"
         POTFILE_DESTINATION "locale"
         LANGUAGES "nn;nb;da;sv;de;fr;nl"
-        XGETTEXT_ARGS 
+        XGETTEXT_ARGS
+            ${RLOG_XGETTEXT_ARGS}
             --language=C++
             --from-code=UTF-8
-            --keyword=_ --keyword=N_ 
-            --keyword=fmt_:1
-            --keyword=n_:1,2
-            --keyword=ERROR_FMT_:1 --keyword=WARN_FMT_:1
-            --keyword=INFO_FMT_:1 --keyword=DEBUG_FMT_:1
-            --keyword=USER_:1 --keyword=USER_FMT_:1
-            --keyword=INFO_NFMT_:1,2 --keyword=NOTICE_NFMT_:1,2
-            --keyword=WARNING_NFMT_:1,2 --keyword=ERROR_NFMT_:1,2
     )
 endif()
 
